@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Projeto final:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Projeto_final_jar</output-path>
+    <root id="archive" name="Projeto final.jar">
+      <element id="module-output" name="Projeto final" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libraries/jaudiotagger-2.0.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libraries/jlayer-1.0.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
