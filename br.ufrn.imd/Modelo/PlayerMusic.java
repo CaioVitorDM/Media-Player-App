@@ -36,7 +36,7 @@ public class PlayerMusic {
     public void tocarMusica(int index) {
         thread = new Thread(() -> {
             try {
-                if (musicFiles != null && musicFiles.length > index) {
+                if (musicFiles != null && musicFiles.length > index && isPlaying()) {
                     File file = musicFiles[index];
                     AudioDevice audioDevice = FactoryRegistry.systemRegistry().createAudioDevice();
                     player = new Player(new FileInputStream(file), audioDevice);
