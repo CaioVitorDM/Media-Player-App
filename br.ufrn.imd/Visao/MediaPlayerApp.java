@@ -1,9 +1,10 @@
 package br.ufrn.imd.Visao;
 
-import br.ufrn.imd.GUI.PlayerInterface;
+import br.ufrn.imd.Interfaces.TelaPrincipal;
 
 public class MediaPlayerApp {
     public static void main(String[] args) {
-        PlayerInterface playerInterface = new PlayerInterface();
+
+        TelaPrincipal telaPrincipal = new TelaPrincipal();
     }
 }
