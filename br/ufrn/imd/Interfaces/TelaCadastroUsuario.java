@@ -81,7 +81,7 @@ public class TelaCadastroUsuario extends JInternalFrame implements ActionListene
                 JOptionPane.showMessageDialog(null, "Usuário " + c.getNomeusuario() + " cadastrado!");
             }
             else{
-                JOptionPane.showMessageDialog(null, "Usuário " + c.getNomeusuario() + " não pode ser cadastrado!");
+                JOptionPane.showMessageDialog(null, "Usuário " + c.getNomeusuario() + " já foi cadastrado!");
             }
 
             tnome.setText("");

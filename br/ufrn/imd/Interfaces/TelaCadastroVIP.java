@@ -68,9 +68,12 @@ public class TelaCadastroVIP extends JInternalFrame implements ActionListener{
             c.setSenha(tsenha.getText());
 
             // persistir dados
-            usuariosDAO.addUsuario(c);
-            JOptionPane.showMessageDialog(null, "Usuário " + c.getNomeusuario() + " incluído!");
-
+            if(usuariosDAO.addUsuario(c)) {
+                JOptionPane.showMessageDialog(null, "Usuário " + c.getNomeusuario() + " cadastrado!");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Usuário " + c.getNomeusuario() + " já foi cadastrado!");
+            }
             tnome.setText("");
             tsenha.setText("");
 
