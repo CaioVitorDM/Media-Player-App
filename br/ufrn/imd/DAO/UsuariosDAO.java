@@ -1,5 +1,6 @@
 package br.ufrn.imd.DAO;
 
+import br.ufrn.imd.Modelo.Admin;
 import br.ufrn.imd.Modelo.Usuario;
 
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ public class UsuariosDAO {
 
     public UsuariosDAO(){
         listaUsuarios = new ArrayList<Usuario>();
+        Admin userAdmin = new Admin();
+        listaUsuarios.add(userAdmin);
     }
 
     //Singleton

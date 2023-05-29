@@ -10,7 +10,7 @@ public class UsuarioVIP extends Usuario{
         playlists = new ArrayList<File[]>();
     }*/
     public void printUsuario(){
-        System.out.println("O nome deste usuário é: " + getNomeusuario() + ", do tipo Usuário VIP");
+        System.out.println("VIP User: " + getNomeusuario());
     }
 
     /*public void addPlaylist(File directory){

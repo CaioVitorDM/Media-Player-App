@@ -1,5 +1,6 @@
 package br.ufrn.imd.Interfaces;
 
+import br.ufrn.imd.DAO.UsuariosDAO;
 import br.ufrn.imd.Modelo.PlayerMusic;
 
 import javax.swing.*;
@@ -19,6 +20,7 @@ public class TelaPrincipal extends JFrame implements ActionListener{
     private int totalMusicCount = 0;
     private JProgressBar progressBar;
     private Timer progressBarTimer;
+    private static UsuariosDAO usuariosDAO;
 
     JDesktopPane dtp = new JDesktopPane();
 
@@ -46,11 +48,13 @@ public class TelaPrincipal extends JFrame implements ActionListener{
     JButton selectDirectoryButton = new JButton("Select Directory");
     JButton nextButton = new JButton(">>");
     JButton previousButton = new JButton("<<");
+    JScrollPane scrollPane;
 
 
     public TelaPrincipal() {
         player = null;
         isPlaying = false;
+        usuariosDAO = UsuariosDAO.getInstance();
 
         DefaultListModel<String> listModel = new DefaultListModel<>();
         musicList = new JList<>(listModel);
@@ -64,7 +68,7 @@ public class TelaPrincipal extends JFrame implements ActionListener{
             }
         });
 
-        JScrollPane scrollPane = new JScrollPane(musicList);
+        scrollPane = new JScrollPane(musicList);
         scrollPane.setPreferredSize(new Dimension(250, 400));
 
         //criação dos actions listeners
@@ -74,6 +78,9 @@ public class TelaPrincipal extends JFrame implements ActionListener{
         nextButton.addActionListener(this);
         previousButton.addActionListener(this);
         mCadUsuario.addActionListener(this);
+        mCadUsuarioVIP.addActionListener(this);
+        mListUsuarios.addActionListener(this);
+        mItem8.addActionListener(this);
 
         progressBar = new JProgressBar();
         progressBar.setStringPainted(true);
@@ -132,8 +139,6 @@ public class TelaPrincipal extends JFrame implements ActionListener{
         setVisible(true);
         setResizable(false);
         setTitle("Music Player App");
-
-
     }
 
 
@@ -152,6 +157,11 @@ public class TelaPrincipal extends JFrame implements ActionListener{
             TelaCadastroUsuario tlUsuario = new TelaCadastroUsuario("Cadastrar Usuário:");
             dtp.add(tlUsuario);
             tlUsuario.setVisible(true);
+        }
+
+        if(e.getSource() == mListUsuarios){
+            usuariosDAO = UsuariosDAO.getInstance();
+            usuariosDAO.listUsuarios();
         }
 
         if(e.getSource() == playButton){

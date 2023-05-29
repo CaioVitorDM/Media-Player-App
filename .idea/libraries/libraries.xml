@@ -1,6 +1,7 @@
 <component name="libraryTable">
-  <library name="jaudiotagger-2.0.2">
+  <library name="libraries">
     <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libraries/jlayer-1.0.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/libraries/jaudiotagger-2.0.2.jar!/" />
     </CLASSES>
     <JAVADOC />
