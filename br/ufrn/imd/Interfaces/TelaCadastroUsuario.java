@@ -77,8 +77,12 @@ public class TelaCadastroUsuario extends JInternalFrame implements ActionListene
             c.setSenha(tsenha.getText());
 
             // persistir dados
-            usuariosDAO.addUsuario(c);
-            JOptionPane.showMessageDialog(null, "Usuário " + c.getNomeusuario() + " incluído!");
+            if(usuariosDAO.addUsuario(c)) {
+                JOptionPane.showMessageDialog(null, "Usuário " + c.getNomeusuario() + " cadastrado!");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Usuário " + c.getNomeusuario() + " não pode ser cadastrado!");
+            }
 
             tnome.setText("");
             tsenha.setText("");

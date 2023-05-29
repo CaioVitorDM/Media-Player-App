@@ -2,47 +2,41 @@ package br.ufrn.imd.Interfaces;
 
 import br.ufrn.imd.DAO.UsuariosDAO;
 import br.ufrn.imd.Modelo.UsuarioComum;
-import br.ufrn.imd.Modelo.UsuarioVIP;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TelaCadastroVIP extends JInternalFrame implements ActionListener{
+public class TelaRemoverUsuario extends JInternalFrame implements ActionListener{
 
     private static final long serialVersionUID = 1L;
     private static UsuariosDAO usuariosDAO;
 
     JLabel lnome   = new JLabel("Nome de Usuário:");
-    JLabel lsenha = new JLabel("Senha:");
 
     private Font f	= new Font("Courier", Font.PLAIN, 12);
 
     //campos
     JTextField tnome   = new JTextField();
-    JTextField tsenha    = new JTextField();
 
     //botões
     JButton btSubmeter = new JButton("Submeter");
     JButton btLimpar = new JButton("Limpar");
 
-    public TelaCadastroVIP(String str)  {
+    public TelaRemoverUsuario(String str)  {
         super(str,false,true);
 
 
-        setLayout(new GridLayout(3, 2));
+        setLayout(new GridLayout(2, 2));
 
 
         // setando a fonte
         lnome.setFont(f);
-        lsenha.setFont(f);
 
         // adicionando componentes
         add(lnome);
         add(tnome);
-        add(lsenha);
-        add(tsenha);
         add(btSubmeter);
         add(btLimpar);
 
@@ -62,23 +56,24 @@ public class TelaCadastroVIP extends JInternalFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btSubmeter){
             // setar atributos Cliente
-            UsuarioVIP c = new UsuarioVIP();
+            UsuarioComum c = new UsuarioComum();
 
             c.setNomeUsuario(tnome.getText());
-            c.setSenha(tsenha.getText());
+            c.setSenha("padrão");
 
             // persistir dados
-            usuariosDAO.addUsuario(c);
-            JOptionPane.showMessageDialog(null, "Usuário " + c.getNomeusuario() + " incluído!");
-
+            if(usuariosDAO.removeUsuario(c)){
+                JOptionPane.showMessageDialog(null, "Usuário " + c.getNomeusuario() + " removido!");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Usuário " + c.getNomeusuario() + " não encontrado!");
+            }
             tnome.setText("");
-            tsenha.setText("");
 
             tnome.requestFocus();
         }
         else if(e.getSource() == btLimpar){
             tnome.setText("");
-            tsenha.setText("");
         }
     }
 }

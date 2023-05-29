@@ -32,8 +32,9 @@ public class TelaPrincipal extends JFrame implements ActionListener{
 
 
     //Criação dos itens que vão em cada menu
-    JMenuItem mCadUsuario = new JMenuItem("Cadastrar usuários comuns");
+    JMenuItem mCadUsuario = new JMenuItem("Cadastrar usuários");
     JMenuItem mCadUsuarioVIP = new JMenuItem("Cadastrar usuários VIP's");
+    JMenuItem mRemUsuario = new JMenuItem("Remover usuário");
 
 
     JMenuItem mListUsuarios = new JMenuItem("Listar Usuários");
@@ -79,6 +80,7 @@ public class TelaPrincipal extends JFrame implements ActionListener{
         previousButton.addActionListener(this);
         mCadUsuario.addActionListener(this);
         mCadUsuarioVIP.addActionListener(this);
+        mRemUsuario.addActionListener(this);
         mListUsuarios.addActionListener(this);
         mItem8.addActionListener(this);
 
@@ -92,6 +94,7 @@ public class TelaPrincipal extends JFrame implements ActionListener{
 
         menuCadastro.add(mCadUsuario);
         menuCadastro.add(mCadUsuarioVIP);
+        menuCadastro.add(mRemUsuario);
 
 
         menuListagem.add(mListUsuarios);
@@ -145,18 +148,52 @@ public class TelaPrincipal extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == mCadUsuario) {
             try {
-                System.out.println("Esperando .....");
+                System.out.println("Esperando...");
                 Thread.sleep(500);
             } catch (InterruptedException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
 
-            System.out.println("Pronto .....");
+            System.out.println("Pronto.");
 
-            TelaCadastroUsuario tlUsuario = new TelaCadastroUsuario("Cadastrar Usuário:");
+            TelaCadastroUsuario tlUsuario = new TelaCadastroUsuario("Cadastrar Usuário");
             dtp.add(tlUsuario);
             tlUsuario.setVisible(true);
+        }
+
+        if(e.getSource() == mCadUsuarioVIP){
+            try{
+                System.out.println("Esperando...");
+                Thread.sleep(500);
+            }
+            catch (InterruptedException e1){
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+
+            System.out.println("Pronto.");
+
+            TelaCadastroVIP tlUsuarioVIP = new TelaCadastroVIP("Cadastrar Usuário VIP");
+            dtp.add(tlUsuarioVIP);
+            tlUsuarioVIP.setVisible(true);
+        }
+
+        if(e.getSource() == mRemUsuario){
+            try{
+                System.out.println("Esperando...");
+                Thread.sleep(500);
+            }
+            catch (InterruptedException e1){
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+
+            System.out.println("Pronto.");
+
+            TelaRemoverUsuario tlRemUser = new TelaRemoverUsuario("Remover usuário");
+            dtp.add(tlRemUser);
+            tlRemUser.setVisible(true);
         }
 
         if(e.getSource() == mListUsuarios){
@@ -267,6 +304,18 @@ public class TelaPrincipal extends JFrame implements ActionListener{
                 musicList.setSelectedIndex(currentMusicIndex);
                 startProgressBarTimer();
             }
+        }
+
+        if(e.getSource() == mItem8){
+            try {
+                System.out.println("Fechando o sistema...");
+                Thread.sleep(500);
+            } catch (InterruptedException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            System.exit(0);
+
         }
     }
 
