@@ -1,6 +1,8 @@
 package br.ufrn.imd.Modelo;
 
-public abstract class Usuario{
+import java.io.Serializable;
+
+public abstract class Usuario implements Serializable {
     private String nomeusuario;
     private String senha;
 

@@ -1,7 +1,6 @@
-package br.ufrn.imd.Interfaces;
+package br.ufrn.imd.InterfacesGraficas;
 
 import br.ufrn.imd.DAO.UsuariosDAO;
-import br.ufrn.imd.Modelo.UsuarioComum;
 import br.ufrn.imd.Modelo.UsuarioVIP;
 
 import javax.swing.*;

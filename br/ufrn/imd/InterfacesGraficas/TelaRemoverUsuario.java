@@ -1,57 +1,42 @@
-package br.ufrn.imd.Interfaces;
+package br.ufrn.imd.InterfacesGraficas;
 
+import br.ufrn.imd.DAO.UsuariosDAO;
+import br.ufrn.imd.Modelo.UsuarioComum;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.text.MaskFormatter;
-
-import br.ufrn.imd.Modelo.UsuarioComum;
-import br.ufrn.imd.Modelo.Usuario;
-import br.ufrn.imd.DAO.UsuariosDAO;
-public class TelaCadastroUsuario extends JInternalFrame implements ActionListener{
+public class TelaRemoverUsuario extends JInternalFrame implements ActionListener{
 
     private static final long serialVersionUID = 1L;
     private static UsuariosDAO usuariosDAO;
 
     JLabel lnome   = new JLabel("Nome de Usuário:");
-    JLabel lsenha = new JLabel("Senha:");
 
     private Font f	= new Font("Courier", Font.PLAIN, 12);
 
     //campos
     JTextField tnome   = new JTextField();
-    JTextField tsenha    = new JTextField();
 
     //botões
     JButton btSubmeter = new JButton("Submeter");
     JButton btLimpar = new JButton("Limpar");
 
-    public TelaCadastroUsuario(String str)  {
+    public TelaRemoverUsuario(String str)  {
         super(str,false,true);
 
 
-        setLayout(new GridLayout(3, 2));
+        setLayout(new GridLayout(2, 2));
 
 
         // setando a fonte
         lnome.setFont(f);
-        lsenha.setFont(f);
 
         // adicionando componentes
         add(lnome);
         add(tnome);
-        add(lsenha);
-        add(tsenha);
         add(btSubmeter);
         add(btLimpar);
 
@@ -74,24 +59,21 @@ public class TelaCadastroUsuario extends JInternalFrame implements ActionListene
             UsuarioComum c = new UsuarioComum();
 
             c.setNomeUsuario(tnome.getText());
-            c.setSenha(tsenha.getText());
+            c.setSenha("padrão");
 
             // persistir dados
-            if(usuariosDAO.addUsuario(c)) {
-                JOptionPane.showMessageDialog(null, "Usuário " + c.getNomeusuario() + " cadastrado!");
+            if(usuariosDAO.removeUsuario(c)){
+                JOptionPane.showMessageDialog(null, "Usuário " + c.getNomeusuario() + " removido!");
             }
             else{
-                JOptionPane.showMessageDialog(null, "Usuário " + c.getNomeusuario() + " já foi cadastrado!");
+                JOptionPane.showMessageDialog(null, "Usuário " + c.getNomeusuario() + " não encontrado!");
             }
-
             tnome.setText("");
-            tsenha.setText("");
 
             tnome.requestFocus();
         }
         else if(e.getSource() == btLimpar){
             tnome.setText("");
-            tsenha.setText("");
         }
     }
 }

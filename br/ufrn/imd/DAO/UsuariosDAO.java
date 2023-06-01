@@ -3,11 +3,13 @@ package br.ufrn.imd.DAO;
 import br.ufrn.imd.Modelo.Admin;
 import br.ufrn.imd.Modelo.Usuario;
 
+import java.io.*;
 import java.util.ArrayList;
 
 public class UsuariosDAO {
     private ArrayList<Usuario> listaUsuarios;
     private static UsuariosDAO usuariosDAO;
+    File arquivo = new File(System.getProperty("user.dir") + File.separator + "usuarios.txt");
 
     public UsuariosDAO(){
         listaUsuarios = new ArrayList<Usuario>();
@@ -54,4 +56,43 @@ public class UsuariosDAO {
         }
         System.out.println("-----------------------------------------------------------------");
     }
+
+    public void salvarUsuarios() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("./usuarios.txt");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(listaUsuarios);
+            out.close();
+            fileOut.close();
+            System.out.println("Usuários salvos com sucesso.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void carregarUsuarios() {
+        try {
+            if (!arquivo.exists()) {
+                arquivo.createNewFile();
+                System.out.println("Arquivo usuarios.txt criado.");
+                return;
+            }
+
+            FileInputStream fileIn = new FileInputStream(arquivo);
+            if (arquivo.length() == 0) {
+                System.out.println("O arquivo usuarios.txt está vazio.");
+                fileIn.close();
+                return;
+            }
+
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            listaUsuarios = (ArrayList<Usuario>) in.readObject();
+            in.close();
+            fileIn.close();
+            System.out.println("Usuários carregados com sucesso.");
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

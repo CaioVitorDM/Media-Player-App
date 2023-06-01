@@ -1,4 +1,4 @@
-package br.ufrn.imd.Interfaces;
+package br.ufrn.imd.InterfacesGraficas;
 
 import br.ufrn.imd.DAO.UsuariosDAO;
 import br.ufrn.imd.Modelo.PlayerMusic;
@@ -9,7 +9,6 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.Rectangle2D;
 import java.io.File;
 
 public class TelaPrincipal extends JFrame implements ActionListener{
@@ -56,6 +55,7 @@ public class TelaPrincipal extends JFrame implements ActionListener{
         player = null;
         isPlaying = false;
         usuariosDAO = UsuariosDAO.getInstance();
+        usuariosDAO.carregarUsuarios();
 
         DefaultListModel<String> listModel = new DefaultListModel<>();
         musicList = new JList<>(listModel);
@@ -307,6 +307,8 @@ public class TelaPrincipal extends JFrame implements ActionListener{
         }
 
         if(e.getSource() == mItem8){
+            usuariosDAO = UsuariosDAO.getInstance();
+            usuariosDAO.salvarUsuarios();
             try {
                 System.out.println("Fechando o sistema...");
                 Thread.sleep(500);
@@ -315,6 +317,7 @@ public class TelaPrincipal extends JFrame implements ActionListener{
                 e1.printStackTrace();
             }
             System.exit(0);
+
 
         }
     }
