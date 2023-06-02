@@ -9,6 +9,8 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 
 public class TelaPrincipal extends JFrame implements ActionListener{
@@ -136,7 +138,10 @@ public class TelaPrincipal extends JFrame implements ActionListener{
 
         add(dtp);
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        //chamando a função que define a nova operação ao clicar no botão X para fechar.
+        setupWindowListener();
+
         setSize(1000, 700);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -307,25 +312,32 @@ public class TelaPrincipal extends JFrame implements ActionListener{
         }
 
         if(e.getSource() == mItem8){
-            usuariosDAO = UsuariosDAO.getInstance();
-            usuariosDAO.salvarUsuarios();
-            try {
-                System.out.println("Fechando o sistema...");
-                Thread.sleep(500);
-            } catch (InterruptedException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
-            System.exit(0);
-
-
+            exitProgram();
         }
     }
 
 
+    private void setupWindowListener(){
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                exitProgram();
+            }
+        });
+    }
 
-
-
+    private void exitProgram(){
+        usuariosDAO = UsuariosDAO.getInstance();
+        usuariosDAO.salvarUsuarios();
+        try {
+            System.out.println("Fechando o sistema...");
+            Thread.sleep(500);
+        } catch (InterruptedException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        System.exit(0);
+    }
 
     private void updateMusicList(File directory) {
             DefaultListModel<String> listModel = (DefaultListModel<String>) musicList.getModel();
