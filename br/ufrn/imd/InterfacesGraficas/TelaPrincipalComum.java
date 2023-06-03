@@ -2,6 +2,7 @@ package br.ufrn.imd.InterfacesGraficas;
 
 import br.ufrn.imd.DAO.UsuariosDAO;
 import br.ufrn.imd.Modelo.Song;
+import br.ufrn.imd.Modelo.UsuarioComum;
 import br.ufrn.imd.Modelo.UsuarioVIP;
 
 import javax.swing.*;
@@ -14,7 +15,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 
-public class TelaPrincipal extends JFrame implements ActionListener{
+public class TelaPrincipalComum extends JFrame implements ActionListener{
+
     private Song musica;
     private boolean isPlaying;
     private JList<String> musicList;
@@ -22,24 +24,19 @@ public class TelaPrincipal extends JFrame implements ActionListener{
     private int totalMusicCount = 0;
     private JProgressBar progressBar;
     private Timer progressBarTimer;
-    private String nomeUsuario;
     private static UsuariosDAO usuariosDAO;
+
+    private static String nomeUsuario;
 
     JDesktopPane dtp = new JDesktopPane();
 
     //Criação dos menus na Menu Bar
     JMenuBar menuBar = new JMenuBar();
-    JMenu menuCadastro = new JMenu("Cadastros");
     JMenu menuListagem = new JMenu("Listagem");
     JMenu menuAjuda = new JMenu("Ajuda");
 
 
     //Criação dos itens que vão em cada menu
-    JMenuItem mCadUsuario = new JMenuItem("Cadastrar usuários");
-    JMenuItem mCadUsuarioVIP = new JMenuItem("Cadastrar usuários VIP's");
-    JMenuItem mRemUsuario = new JMenuItem("Remover usuário");
-
-
     JMenuItem mListUsuarios = new JMenuItem("Listar Usuários");
 
     JMenuItem mItem7 = new JMenuItem("Sobre");
@@ -55,7 +52,7 @@ public class TelaPrincipal extends JFrame implements ActionListener{
     JScrollPane scrollPane;
 
 
-    public TelaPrincipal() {
+    public TelaPrincipalComum() {
         musica = null;
         isPlaying = false;
         usuariosDAO = UsuariosDAO.getInstance();
@@ -82,9 +79,6 @@ public class TelaPrincipal extends JFrame implements ActionListener{
         selectDirectoryButton.addActionListener(this);
         nextButton.addActionListener(this);
         previousButton.addActionListener(this);
-        mCadUsuario.addActionListener(this);
-        mCadUsuarioVIP.addActionListener(this);
-        mRemUsuario.addActionListener(this);
         mListUsuarios.addActionListener(this);
         mItem8.addActionListener(this);
 
@@ -92,13 +86,8 @@ public class TelaPrincipal extends JFrame implements ActionListener{
         progressBar.setStringPainted(true);
 
         setJMenuBar(menuBar);
-        menuBar.add(menuCadastro);
         menuBar.add(menuListagem);
         menuBar.add(menuAjuda);
-
-        menuCadastro.add(mCadUsuario);
-        menuCadastro.add(mCadUsuarioVIP);
-        menuCadastro.add(mRemUsuario);
 
 
         menuListagem.add(mListUsuarios);
@@ -140,9 +129,7 @@ public class TelaPrincipal extends JFrame implements ActionListener{
 
         add(dtp);
 
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        //chamando a função que define a nova operação ao clicar no botão X para fechar.
-        setupWindowListener();
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         setSize(1000, 700);
         setLocationRelativeTo(null);
@@ -153,55 +140,6 @@ public class TelaPrincipal extends JFrame implements ActionListener{
 
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == mCadUsuario) {
-            try {
-                System.out.println("Esperando...");
-                Thread.sleep(500);
-            } catch (InterruptedException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
-
-            System.out.println("Pronto.");
-
-            TelaCadastroUsuario tlUsuario = new TelaCadastroUsuario("Cadastrar Usuário");
-            dtp.add(tlUsuario);
-            tlUsuario.setVisible(true);
-        }
-
-        if(e.getSource() == mCadUsuarioVIP){
-            try{
-                System.out.println("Esperando...");
-                Thread.sleep(500);
-            }
-            catch (InterruptedException e1){
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
-
-            System.out.println("Pronto.");
-
-            TelaCadastroVIP tlUsuarioVIP = new TelaCadastroVIP("Cadastrar Usuário VIP");
-            dtp.add(tlUsuarioVIP);
-            tlUsuarioVIP.setVisible(true);
-        }
-
-        if(e.getSource() == mRemUsuario){
-            try{
-                System.out.println("Esperando...");
-                Thread.sleep(500);
-            }
-            catch (InterruptedException e1){
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
-
-            System.out.println("Pronto.");
-
-            TelaRemoverUsuario tlRemUser = new TelaRemoverUsuario("Remover usuário");
-            dtp.add(tlRemUser);
-            tlRemUser.setVisible(true);
-        }
 
         if(e.getSource() == mListUsuarios){
             usuariosDAO = UsuariosDAO.getInstance();
@@ -255,7 +193,7 @@ public class TelaPrincipal extends JFrame implements ActionListener{
             if(musica == null) {
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                int result = fileChooser.showOpenDialog(TelaPrincipal.this);
+                int result = fileChooser.showOpenDialog(TelaPrincipalComum.this);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedDirectory = fileChooser.getSelectedFile();
                     musica = new Song(selectedDirectory);
@@ -268,7 +206,7 @@ public class TelaPrincipal extends JFrame implements ActionListener{
                 musica.pararMusica();
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                int result = fileChooser.showOpenDialog(TelaPrincipal.this);
+                int result = fileChooser.showOpenDialog(TelaPrincipalComum.this);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedDirectory = fileChooser.getSelectedFile();
                     musica = new Song(selectedDirectory);
@@ -280,7 +218,7 @@ public class TelaPrincipal extends JFrame implements ActionListener{
             else if(musica != null && !musica.isPlaying()){
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                int result = fileChooser.showOpenDialog(TelaPrincipal.this);
+                int result = fileChooser.showOpenDialog(TelaPrincipalComum.this);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedDirectory = fileChooser.getSelectedFile();
                     musica = new Song(selectedDirectory);
@@ -318,19 +256,7 @@ public class TelaPrincipal extends JFrame implements ActionListener{
         }
     }
 
-
-    private void setupWindowListener(){
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                exitProgram();
-            }
-        });
-    }
-
     private void exitProgram(){
-        usuariosDAO = UsuariosDAO.getInstance();
-        usuariosDAO.salvarUsuarios();
         try {
             System.out.println("Fechando o sistema...");
             Thread.sleep(500);
@@ -342,24 +268,24 @@ public class TelaPrincipal extends JFrame implements ActionListener{
     }
 
     private void updateMusicList(File directory) {
-            DefaultListModel<String> listModel = (DefaultListModel<String>) musicList.getModel();
-            listModel.clear();
+        DefaultListModel<String> listModel = (DefaultListModel<String>) musicList.getModel();
+        listModel.clear();
 
-            if (directory != null && directory.isDirectory()) {
-                File[] files = directory.listFiles();
-                if (files != null) {
-                    for (File file : files) {
-                        if (file.isFile() && file.getName().toLowerCase().endsWith(".mp3")) {
-                            listModel.addElement(file.getName());
-                        }
+        if (directory != null && directory.isDirectory()) {
+            File[] files = directory.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isFile() && file.getName().toLowerCase().endsWith(".mp3")) {
+                        listModel.addElement(file.getName());
                     }
-                    totalMusicCount = listModel.getSize();
-                    currentMusicIndex = -1;
-                    stopProgressBarTimer();
-                    resetProgressBar();
                 }
+                totalMusicCount = listModel.getSize();
+                currentMusicIndex = -1;
+                stopProgressBarTimer();
+                resetProgressBar();
             }
         }
+    }
 
 
     private void startProgressBarTimer() {
@@ -386,7 +312,7 @@ public class TelaPrincipal extends JFrame implements ActionListener{
         progressBar.setString("00:00 / 00:00");
     }
 
-    public void setUser(String user){
-        this.nomeUsuario = user;
+    public static void setUser(String user){
+        nomeUsuario = user;
     }
 }

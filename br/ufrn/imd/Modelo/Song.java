@@ -12,18 +12,17 @@ import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.exceptions.CannotReadException;
 import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
 import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
-import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
 
-public class PlayerMusic {
+public class Song {
     private File[] musicFiles;
     private Player player;
     private Thread thread;
     private boolean isPlaying;
     private int currentMusicIndex;
 
-    public PlayerMusic(File directory) {
+    public Song(File directory) {
         this.musicFiles = directory.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {

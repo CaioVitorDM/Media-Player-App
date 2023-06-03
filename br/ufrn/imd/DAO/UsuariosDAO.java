@@ -2,6 +2,7 @@ package br.ufrn.imd.DAO;
 
 import br.ufrn.imd.Modelo.Admin;
 import br.ufrn.imd.Modelo.Usuario;
+import br.ufrn.imd.Modelo.UsuarioVIP;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -93,6 +94,43 @@ public class UsuariosDAO {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean loginUser(String nome, String senha){
+        for(int i = 0; i < listaUsuarios.size(); i++){
+            if(listaUsuarios.get(i).getNomeusuario().equals(nome) && listaUsuarios.get(i).getSenha().equals(senha)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isUserVIP(String nome, String senha){
+        for(int i = 0; i < listaUsuarios.size(); i++){
+            if(listaUsuarios.get(i).getNomeusuario().equals(nome) && listaUsuarios.get(i).getSenha().equals(senha)){
+                if(listaUsuarios.get(i) instanceof UsuarioVIP){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean isUserAdmin(String nome, String senha){
+        for(int i = 0; i < listaUsuarios.size(); i++){
+            if(listaUsuarios.get(i).getNomeusuario().equals(nome) && listaUsuarios.get(i).getSenha().equals(senha)){
+                if(listaUsuarios.get(i) instanceof Admin){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 
 }
