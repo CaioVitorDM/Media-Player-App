@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class UsuariosDAO {
     private ArrayList<Usuario> listaUsuarios;
     private static UsuariosDAO usuariosDAO;
-    File arquivo = new File(System.getProperty("user.dir") + File.separator + "usuarios.txt");
+    File arquivo = new File(System.getProperty("user.dir") + File.separator + "./br/ufrn/IMD/Diretorios/usuarios.txt");
 
     public UsuariosDAO(){
         listaUsuarios = new ArrayList<Usuario>();
@@ -60,7 +60,7 @@ public class UsuariosDAO {
 
     public void salvarUsuarios() {
         try {
-            FileOutputStream fileOut = new FileOutputStream("./usuarios.txt");
+            FileOutputStream fileOut = new FileOutputStream("./br/ufrn/imd/Diretorios/usuarios.txt");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(listaUsuarios);
             out.close();
