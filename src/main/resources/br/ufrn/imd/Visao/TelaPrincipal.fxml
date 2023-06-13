@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #4F6367;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.Controller.TelaPrincipalController">
+<BorderPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #4F6367;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <MenuBar prefWidth="958.0" style="-fx-background-color: #B8D8D8;" BorderPane.alignment="CENTER">
         <menus>
@@ -39,7 +39,7 @@
       </MenuBar>
    </top>
    <right>
-      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ScrollPane fx:id="DirectorysPanel" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="820.0" prefWidth="200.0" style="-fx-background-color: #7A9E9F;" />
         </content>
@@ -58,7 +58,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ProgressBar prefHeight="8.0" prefWidth="347.0" progress="0.0" GridPane.columnIndex="1">
+            <ProgressBar fx:id="ProgressBar" prefHeight="8.0" prefWidth="347.0" progress="0.0" GridPane.columnIndex="1">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -98,10 +98,10 @@
       </GridPane>
    </bottom>
    <left>
-      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="821.0" prefWidth="200.0" style="-fx-background-color: #7A9E9F;" />
-        </content>
-      </ScrollPane>
+       <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+           <content>
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="820.0" prefWidth="200.0" style="-fx-background-color: #7A9E9F;" />
+           </content>
+       </ScrollPane>
    </left>
 </BorderPane>

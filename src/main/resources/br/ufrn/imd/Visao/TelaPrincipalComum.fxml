@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #4F6367;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.Controller.TelaPrincipalController">
+<BorderPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #4F6367;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <MenuBar prefWidth="958.0" style="-fx-background-color: #B8D8D8;" BorderPane.alignment="CENTER">
         <menus>
@@ -38,13 +38,6 @@
         </menus>
       </MenuBar>
    </top>
-   <right>
-      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="820.0" prefWidth="200.0" style="-fx-background-color: #7A9E9F;" />
-        </content>
-      </ScrollPane>
-   </right>
    <bottom>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -89,19 +82,14 @@
                   <Insets left="20.0" />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="22.0" prefWidth="100.0" style="-fx-background-color: #B8D8D8;" text="Create Playlist" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets left="215.0" right="20.0" />
-               </GridPane.margin>
-            </Button>
          </children>
       </GridPane>
    </bottom>
    <left>
-      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="821.0" prefWidth="200.0" style="-fx-background-color: #7A9E9F;" />
-        </content>
-      </ScrollPane>
+       <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+           <content>
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="820.0" prefWidth="200.0" style="-fx-background-color: #7A9E9F;" />
+           </content>
+       </ScrollPane>
    </left>
 </BorderPane>

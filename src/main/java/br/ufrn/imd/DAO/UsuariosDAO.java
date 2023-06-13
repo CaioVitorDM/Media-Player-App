@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class UsuariosDAO {
     private ArrayList<Usuario> listaUsuarios;
     private static UsuariosDAO usuariosDAO;
-    File arquivo = new File(System.getProperty("user.dir") + File.separator + "./br/ufrn/IMD/Diretorios/usuarios.txt");
+    File arquivo = new File(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Diretorios/usuarios.txt");
 
     public UsuariosDAO(){
         listaUsuarios = new ArrayList<Usuario>();
@@ -60,7 +60,7 @@ public class UsuariosDAO {
 
     public void salvarUsuarios() {
         try {
-            FileOutputStream fileOut = new FileOutputStream("./br/ufrn/imd/Diretorios/usuarios.txt");
+            FileOutputStream fileOut = new FileOutputStream(arquivo);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(listaUsuarios);
             out.close();
@@ -76,6 +76,10 @@ public class UsuariosDAO {
             if (!arquivo.exists()) {
                 arquivo.createNewFile();
                 System.out.println("Arquivo usuarios.txt criado.");
+                // Adicionar o usuário Admin padrão
+                Admin userAdmin = new Admin();
+                listaUsuarios.add(userAdmin);
+                salvarUsuarios(); // Salvar a lista atualizada no arquivo
                 return;
             }
 
