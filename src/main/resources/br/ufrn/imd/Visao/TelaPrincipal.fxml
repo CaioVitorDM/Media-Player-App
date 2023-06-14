@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -13,20 +14,22 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #4F6367;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.Controller.TelaPrincipalController">
+
+<?import javafx.scene.image.ImageView?>
+<BorderPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #4F6367;" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.Controller.TelaPrincipalController" xmlns:fxi="javafx.scene.image.*">
    <top>
       <MenuBar prefWidth="958.0" style="-fx-background-color: #B8D8D8;" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="Cadastro">
             <items>
-              <MenuItem mnemonicParsing="false" text="Cadastrar usuário" onAction="#menuCadastrarComum"/>
-                  <MenuItem mnemonicParsing="false" text="Cadastrar Usuário VIP" onAction="#menuCadastrarVIP"/>
-                  <MenuItem mnemonicParsing="false" text="Remover usuário" onAction="#menuRemoverUsuario"/>
+              <MenuItem mnemonicParsing="false" onAction="#menuCadastrarComum" text="Cadastrar usuário" />
+                  <MenuItem mnemonicParsing="false" onAction="#menuCadastrarVIP" text="Cadastrar Usuário VIP" />
+                  <MenuItem mnemonicParsing="false" onAction="#menuRemoverUsuario" text="Remover usuário" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Listagem">
             <items>
-              <MenuItem mnemonicParsing="false" text="Listar usuários" onAction="#menuListagemUsuarios" />
+              <MenuItem mnemonicParsing="false" onAction="#menuListagemUsuarios" text="Listar usuários" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Sobre">
@@ -58,33 +61,36 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ProgressBar fx:id="ProgressBar" prefHeight="8.0" prefWidth="347.0" progress="0.0" GridPane.columnIndex="1">
+            <ProgressBar fx:id="progressBar" prefHeight="8.0" prefWidth="347.0" progress="0.0" GridPane.columnIndex="1">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </ProgressBar>
-            <Button mnemonicParsing="false" style="-fx-background-color: #B8D8D8;" text="&lt;&lt;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
+            <Button fx:id="previousButton" mnemonicParsing="false" style="-fx-background-color: #B8D8D8;" GridPane.columnIndex="1" onAction="#previousButtonClicked" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
+                <graphic>
+                    <ImageView fx:id="previousButtonImage" fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true" />
+                </graphic>
             </Button>
-            <Button mnemonicParsing="false" style="-fx-background-color: #B8D8D8;" text="Play" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets left="150.0" />
-               </GridPane.margin>
-            </Button>
-            <Button mnemonicParsing="false" style="-fx-background-color: #B8D8D8;" text="&gt;&gt;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
+             <Button fx:id="playButton" mnemonicParsing="false" style="-fx-background-color: #B8D8D8;" GridPane.columnIndex="1" onAction="#playButtonClicked" GridPane.rowIndex="1">
+                 <GridPane.margin>
+                     <Insets left="150.0" />
+                 </GridPane.margin>
+                 <graphic>
+                     <ImageView fx:id="playButtonImage" fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true" />
+                 </graphic>
+             </Button>
+            <Button fx:id="nextButton" mnemonicParsing="false" style="-fx-background-color: #B8D8D8;" GridPane.columnIndex="1" onAction="#nextButtonClicked" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="280.0" right="20.0" />
                </GridPane.margin>
+                <graphic>
+                    <ImageView fx:id="nextButtonImage" fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true" />
+                </graphic>
             </Button>
-            <Button mnemonicParsing="false" style="-fx-background-color: #B8D8D8;" text="Select Directory" GridPane.rowIndex="1">
+            <Button fx:id="selectDirectoryButton" mnemonicParsing="false" style="-fx-background-color: #B8D8D8;" text="Select Directory" onAction="#selectDirectoryButtonClicked" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
@@ -99,9 +105,9 @@
    </bottom>
    <left>
        <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-           <content>
-               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="820.0" prefWidth="200.0" style="-fx-background-color: #7A9E9F;" />
-           </content>
+         <content>
+            <ListView fx:id="musicListView" prefHeight="821.0" prefWidth="200.0" />
+         </content>
        </ScrollPane>
    </left>
 </BorderPane>

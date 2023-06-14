@@ -48,7 +48,7 @@ public class Main extends Application {
         TelaRemoverUsuarioScene = new Scene(fxmlTelaRemoverUsuario);
 
         Parent fxmlTelaListagemUsuarios = FXMLLoader.load((getClass().getResource("TelaListagemUsuarios.fxml")));
-        TelaListagemUsuariosScene = new Scene(fxmlTelaListagemUsuarios);
+        TelaListagemUsuariosScene = new Scene(fxmlTelaListagemUsuarios );
 
         //Definições padrões da janela
         primaryStage.setTitle("Media Player App");
