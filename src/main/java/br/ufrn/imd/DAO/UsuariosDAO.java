@@ -3,6 +3,8 @@ package br.ufrn.imd.DAO;
 import br.ufrn.imd.Modelo.Admin;
 import br.ufrn.imd.Modelo.Usuario;
 import br.ufrn.imd.Modelo.UsuarioVIP;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -48,14 +50,6 @@ public class UsuariosDAO {
         }
         System.out.println("Usuário \u001B[33m" + usuario.getNomeusuario() + "\u001B[0m não encontrado");
         return false;
-    }
-
-    public void listUsuarios(){
-        System.out.println("-----------------------------------------------------------------");
-        for(int i = 0; i < listaUsuarios.size(); i++){
-            listaUsuarios.get(i).printUsuario();
-        }
-        System.out.println("-----------------------------------------------------------------");
     }
 
     public void salvarUsuarios() {
@@ -137,4 +131,12 @@ public class UsuariosDAO {
         return false;
     }
 
+    //Metodo para retornar uma Lista com os nomes dos usuários para inserir na tabela de listagem
+    public ObservableList<String> getNomesUsuarios() {
+        ObservableList<String> nomesUsuarios = FXCollections.observableArrayList();
+        for (Usuario usuario : listaUsuarios) {
+            nomesUsuarios.add(usuario.getNomeusuario());
+        }
+        return nomesUsuarios;
+    }
 }

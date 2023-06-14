@@ -35,4 +35,8 @@ public class TelaPrincipalController implements Initializable {
     public void menuRemoverUsuario(ActionEvent actionEvent){
         Main.changeScreen("TelaRemoverUsuario");
     }
+
+    public void menuListagemUsuarios(ActionEvent actionEvent) {
+        Main.changeScreen("TelaListagemUsuarios");
+    }
 }

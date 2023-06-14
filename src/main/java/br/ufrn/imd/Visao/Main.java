@@ -19,6 +19,7 @@ public class Main extends Application {
     private static Scene TelaCadastroComumScene;
     private static Scene TelaCadastroVIPScene;
     private static Scene TelaRemoverUsuarioScene;
+    private static Scene TelaListagemUsuariosScene;
 
     private static UsuariosDAO usuariosDAO;
 
@@ -45,6 +46,9 @@ public class Main extends Application {
 
         Parent fxmlTelaRemoverUsuario = FXMLLoader.load((getClass().getResource("TelaRemoverUsuario.fxml")));
         TelaRemoverUsuarioScene = new Scene(fxmlTelaRemoverUsuario);
+
+        Parent fxmlTelaListagemUsuarios = FXMLLoader.load((getClass().getResource("TelaListagemUsuarios.fxml")));
+        TelaListagemUsuariosScene = new Scene(fxmlTelaListagemUsuarios);
 
         //Definições padrões da janela
         primaryStage.setTitle("Media Player App");
@@ -87,6 +91,10 @@ public class Main extends Application {
             case "TelaRemoverUsuario":
                 stage.setScene(TelaRemoverUsuarioScene);
                 break;
+            case "TelaListagemUsuarios":
+                stage.setScene(TelaListagemUsuariosScene);
+                break;
+
         }
     }
 
