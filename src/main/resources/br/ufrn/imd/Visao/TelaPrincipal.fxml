@@ -13,15 +13,15 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #4F6367;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #4F6367;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.Controller.TelaPrincipalController">
    <top>
       <MenuBar prefWidth="958.0" style="-fx-background-color: #B8D8D8;" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="Cadastro">
             <items>
-              <MenuItem mnemonicParsing="false" text="Cadastrar usuário" />
-                  <MenuItem mnemonicParsing="false" text="Cadastrar Usuário VIP" />
-                  <MenuItem mnemonicParsing="false" text="Remover usuário" />
+              <MenuItem mnemonicParsing="false" text="Cadastrar usuário" onAction="#menuCadastrarComum"/>
+                  <MenuItem mnemonicParsing="false" text="Cadastrar Usuário VIP" onAction="#menuCadastrarVIP"/>
+                  <MenuItem mnemonicParsing="false" text="Remover usuário" onAction="#menuRemoverUsuario"/>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Listagem">

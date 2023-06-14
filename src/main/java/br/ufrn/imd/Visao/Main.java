@@ -10,16 +10,24 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main extends Application {
+
+    //Declaração da janela, telas e singleton
     private static Stage stage;
     private static Scene loginScene;
     private static Scene TelaPrincipalScene;
     private static Scene TelaPrincipalComumScene;
+    private static Scene TelaCadastroComumScene;
+    private static Scene TelaCadastroVIPScene;
+    private static Scene TelaRemoverUsuarioScene;
+
     private static UsuariosDAO usuariosDAO;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+        //Janela primária
         stage = primaryStage;
 
+        //Cash de todas as telas do programa.
         Parent fxmlLogin = FXMLLoader.load((getClass().getResource("TelaLogin.fxml")));
         loginScene = new Scene(fxmlLogin);
 
@@ -29,11 +37,22 @@ public class Main extends Application {
         Parent fxmlTelaPrincipalComum = FXMLLoader.load((getClass().getResource("TelaPrincipalComum.fxml")));
         TelaPrincipalComumScene = new Scene(fxmlTelaPrincipalComum);
 
+        Parent fxmlTelaCadastroComum = FXMLLoader.load((getClass().getResource("TelaCadastroComum.fxml")));
+        TelaCadastroComumScene = new Scene(fxmlTelaCadastroComum);
 
-        primaryStage.setTitle("Hello!");
+        Parent fxmlTelaCadastroVIP = FXMLLoader.load((getClass().getResource("TelaCadastroVIP.fxml")));
+        TelaCadastroVIPScene = new Scene(fxmlTelaCadastroVIP);
+
+        Parent fxmlTelaRemoverUsuario = FXMLLoader.load((getClass().getResource("TelaRemoverUsuario.fxml")));
+        TelaRemoverUsuarioScene = new Scene(fxmlTelaRemoverUsuario);
+
+        //Definições padrões da janela
+        primaryStage.setTitle("Media Player App");
         primaryStage.setResizable(false);
         primaryStage.setScene(loginScene);
         primaryStage.show();
+
+        //Definindo uma operação de fechar padrão para a janela que vai funcionar em todas as telas
         stage.setOnCloseRequest(event -> {
             usuariosDAO = UsuariosDAO.getInstance();
             usuariosDAO.salvarUsuarios();
@@ -58,6 +77,15 @@ public class Main extends Application {
                 break;
             case "TelaPrincipalComum":
                 stage.setScene(TelaPrincipalComumScene);
+                break;
+            case "TelaCadastroComum":
+                stage.setScene(TelaCadastroComumScene);
+                break;
+            case "TelaCadastroVIP":
+                stage.setScene(TelaCadastroVIPScene);
+                break;
+            case "TelaRemoverUsuario":
+                stage.setScene(TelaRemoverUsuarioScene);
                 break;
         }
     }

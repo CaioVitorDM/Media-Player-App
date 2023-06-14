@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.Controller.TelaCadastroComumController">
    <top>
       <MenuBar BorderPane.alignment="CENTER" />
    </top>
@@ -28,12 +28,12 @@
           <RowConstraints maxHeight="133.0" minHeight="0.0" prefHeight="34.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <PasswordField GridPane.columnIndex="1">
+            <PasswordField fx:id="tsenha" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets top="150.0" />
                </GridPane.margin>
             </PasswordField>
-            <TextField prefHeight="25.0" prefWidth="234.0" GridPane.columnIndex="1">
+            <TextField fx:id="tnome" prefHeight="25.0" prefWidth="234.0" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets bottom="50.0" />
                </GridPane.margin>
@@ -48,12 +48,12 @@
                   <Insets left="25.0" top="150.0" />
                </GridPane.margin>
             </Label>
-            <Button mnemonicParsing="false" style="-fx-background-color: #B8D8D8;" text="Submeter" GridPane.columnIndex="1">
+            <Button mnemonicParsing="false" style="-fx-background-color: #B8D8D8;" text="Submeter" GridPane.columnIndex="1" onAction="#handleSubmitButton">
                <GridPane.margin>
                   <Insets left="200.0" top="300.0" />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" style="-fx-background-color: #B8D8D8;" text="Voltar" GridPane.columnIndex="1">
+            <Button mnemonicParsing="false" style="-fx-background-color: #B8D8D8;" text="Voltar" GridPane.columnIndex="1" onAction="#handleBackButton">
                <GridPane.margin>
                   <Insets left="20.0" top="300.0" />
                </GridPane.margin>

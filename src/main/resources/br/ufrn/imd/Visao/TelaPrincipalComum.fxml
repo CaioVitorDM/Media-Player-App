@@ -17,13 +17,6 @@
    <top>
       <MenuBar prefWidth="958.0" style="-fx-background-color: #B8D8D8;" BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="Cadastro">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Cadastrar usuário" />
-                  <MenuItem mnemonicParsing="false" text="Cadastrar Usuário VIP" />
-                  <MenuItem mnemonicParsing="false" text="Remover usuário" />
-            </items>
-          </Menu>
           <Menu mnemonicParsing="false" text="Listagem">
             <items>
               <MenuItem mnemonicParsing="false" text="Listar usuários" />
