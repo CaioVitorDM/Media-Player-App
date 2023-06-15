@@ -38,6 +38,7 @@ public class TelaPrincipalComumController implements Initializable {
     private Timer timer;
     private TimerTask task;
     private boolean isPlaying;
+    private boolean running;
 
     //Trazendo os elementos da tela
     @FXML
@@ -70,7 +71,7 @@ public class TelaPrincipalComumController implements Initializable {
             }
         });
 
-        //Definição das imagens que aparecerão no botão do play
+        //Definição das imagens que aparecerão nos botões
         playImage = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/play-button.png");
         stopImage = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/stop-button.png");
         nextButtonImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/next.png");
@@ -81,42 +82,30 @@ public class TelaPrincipalComumController implements Initializable {
         previousButtonImage.setImage(previousButtonImg);
     }
 
-    private void updateMusicList(File[] files) {
-        musicListItems.clear();
-
-        for (File file : files) {
-            if (file.isFile() && file.getName().toLowerCase().endsWith(".mp3")) {
-                songs.add(file);
-            }
-        }
-
-        if (!songs.isEmpty()) {
-            for (File song : songs) {
-                musicListItems.add(song.getName());
-            }
-            totalMusicCount = musicListItems.size();
-            currentMusicIndex = -1;
-            stopProgressBarTimer();
-            resetProgressBar();
-        }
+    //Definição das funções dos itens de menu
+    public void menuListagemUsuarios(ActionEvent actionEvent) {
+        Main.changeScreen("TelaListagemUsuarios");
     }
 
-
+    //Definição da função dos botões
     @FXML
     private void playButtonClicked(ActionEvent event) {
-        if(musicListItems.isEmpty()){}
+        //checa se a lista de musicas está vazia
+        if(musicListItems.isEmpty()){
+
+        }
         else {
             if (isPlaying) {
-                mediaPlayer.stop();
+                mediaPlayer.pause();
                 isPlaying = false;
                 playButtonImage.setImage(playImage);
+                resetProgressBar();
             } else {
                 int selectedIndex = musicListView.getSelectionModel().getSelectedIndex();
                 if (selectedIndex != -1) {
                     currentMusicIndex = selectedIndex;
                     if (songs.get(selectedIndex).isFile() && songs.get(selectedIndex).getName().toLowerCase().endsWith(".mp3")) {
                         media = new Media(songs.get(selectedIndex).toURI().toString());
-                        // Resto do código...
                     } else {
                         System.out.println(songs.get(selectedIndex).getName().toLowerCase());
                     }
@@ -134,6 +123,9 @@ public class TelaPrincipalComumController implements Initializable {
     @FXML
     private void nextButtonClicked(ActionEvent event){
         if (currentMusicIndex < totalMusicCount - 1) {
+            if(running == true){
+                resetProgressBar();
+            }
             currentMusicIndex++;
             mediaPlayer.stop();
             media = new Media(songs.get(currentMusicIndex).toURI().toString());
@@ -149,6 +141,9 @@ public class TelaPrincipalComumController implements Initializable {
     @FXML
     private void previousButtonClicked(ActionEvent event) {
         if (currentMusicIndex > 0) {
+            if(running == true){
+                resetProgressBar();
+            }
             currentMusicIndex--;
             mediaPlayer.stop();
             media = new Media(songs.get(currentMusicIndex).toURI().toString());
@@ -159,34 +154,6 @@ public class TelaPrincipalComumController implements Initializable {
             musicListView.getSelectionModel().select(currentMusicIndex);
             startProgressBarTimer();
         }
-    }
-
-    private void startProgressBarTimer() {
-
-    }
-
-    private void stopProgressBarTimer() {
-        // Implementar a lógica para parar o timer da ProgressBar, se necessário
-    }
-
-    private void resetProgressBar() {
-        // Implementar a lógica para resetar a ProgressBar
-    }
-
-    public void menuCadastrarComum(ActionEvent actionEvent) {
-        Main.changeScreen("TelaCadastroComum");
-    }
-
-    public void menuCadastrarVIP(ActionEvent actionEvent){
-        Main.changeScreen("TelaCadastroVIP");
-    }
-
-    public void menuRemoverUsuario(ActionEvent actionEvent){
-        Main.changeScreen("TelaRemoverUsuario");
-    }
-
-    public void menuListagemUsuarios(ActionEvent actionEvent) {
-        Main.changeScreen("TelaListagemUsuarios");
     }
 
     @FXML
@@ -203,6 +170,7 @@ public class TelaPrincipalComumController implements Initializable {
 
         //Se estiver tocando alguma musica ao selecionar o diretório
         else if(mediaPlayer != null && isPlaying){
+            resetProgressBar();
             mediaPlayer.stop();
             playButtonImage.setImage(playImage);
             isPlaying = false;
@@ -222,6 +190,56 @@ public class TelaPrincipalComumController implements Initializable {
                 currentDirectoryFiles = directory.listFiles();
                 updateMusicList(currentDirectoryFiles);
             }
+        }
+    }
+
+    //Definição das funções de funcionalidade da barra de progressão e update da lista de musicas
+    private void updateMusicList(File[] files) {
+        //limpa a lista
+        musicListItems.clear();
+
+        //insere apenas os arquivos .mp3 no array
+        for (File file : files) {
+            if (file.isFile() && file.getName().toLowerCase().endsWith(".mp3")) {
+                songs.add(file);
+            }
+        }
+
+        //adiciona o nome das músicas ao musiclistview
+        if (!songs.isEmpty()) {
+            for (File song : songs) {
+                musicListItems.add(song.getName());
+            }
+            totalMusicCount = musicListItems.size();
+            currentMusicIndex = -1;
+            resetProgressBar();
+        }
+    }
+
+
+    private void startProgressBarTimer() {
+        timer = new Timer();
+        task = new TimerTask() {
+            @Override
+            public void run() {
+                running = true;
+                double current = mediaPlayer.getCurrentTime().toSeconds();
+                double end = media.getDuration().toSeconds();
+                progressBar.setProgress(current/end);
+
+                if(current/end == 1){
+                    resetProgressBar();
+                }
+            }
+        };
+        timer.scheduleAtFixedRate(task, 1000, 1000);
+
+    }
+
+    private void resetProgressBar() {
+        if(running == true) {
+            running = false;
+            timer.cancel();
         }
     }
 }
