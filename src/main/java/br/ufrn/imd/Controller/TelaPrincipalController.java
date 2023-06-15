@@ -98,6 +98,7 @@ public class TelaPrincipalController implements Initializable {
         Main.changeScreen("TelaListagemUsuarios");
     }
 
+
     //Definição da função dos botões
     @FXML
     private void playButtonClicked(ActionEvent event) {

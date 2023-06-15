@@ -1,8 +1,6 @@
 module br.ufrn.imd.Visao {
     requires javafx.controls;
     requires javafx.fxml;
-    requires jlayer;
-    requires jaudiotagger;
     requires javafx.media;
 
     opens br.ufrn.imd.Visao to javafx.fxml;
