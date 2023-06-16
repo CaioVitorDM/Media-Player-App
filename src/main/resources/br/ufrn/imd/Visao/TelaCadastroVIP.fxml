@@ -1,64 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.Controller.TelaCadastroVIPController">
-   <top>
-      <MenuBar BorderPane.alignment="CENTER" />
-   </top>
-   <bottom>
-      <GridPane style="-fx-background-color: #4F6367;" BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="170.0" minWidth="10.0" prefWidth="170.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="333.0" minWidth="10.0" prefWidth="297.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.0" minWidth="0.0" prefWidth="0.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="366.0" minHeight="10.0" prefHeight="366.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="148.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="133.0" minHeight="0.0" prefHeight="34.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <PasswordField fx:id="tsenha" GridPane.columnIndex="1">
-               <GridPane.margin>
-                  <Insets top="150.0" />
-               </GridPane.margin>
-            </PasswordField>
-            <TextField fx:id="tnome" prefHeight="25.0" prefWidth="234.0" GridPane.columnIndex="1">
-               <GridPane.margin>
-                  <Insets bottom="50.0" />
-               </GridPane.margin>
-            </TextField>
-            <Label prefHeight="28.0" prefWidth="105.0" style="-fx-background-color: #B8D8D8;" text=" Nome de Usuário:">
-               <GridPane.margin>
-                  <Insets bottom="50.0" left="20.0" />
-               </GridPane.margin>
-            </Label>
-            <Label prefHeight="27.0" prefWidth="44.0" style="-fx-background-color: #B8D8D8;" text=" Senha:">
-               <GridPane.margin>
-                  <Insets left="25.0" top="150.0" />
-               </GridPane.margin>
-            </Label>
-            <Button mnemonicParsing="false" style="-fx-background-color: #B8D8D8;" text="Submeter" onAction="#handleSubmitButton" GridPane.columnIndex="1">
-               <GridPane.margin>
-                  <Insets left="200.0" top="300.0" />
-               </GridPane.margin>
-            </Button>
-            <Button mnemonicParsing="false" style="-fx-background-color: #B8D8D8;" text="Voltar" onAction="#handleBackButton" GridPane.columnIndex="1">
-               <GridPane.margin>
-                  <Insets left="20.0" top="300.0" />
-               </GridPane.margin>
-            </Button>
-         </children>
-      </GridPane>
-   </bottom>
-</BorderPane>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.Controller.TelaCadastroVIPController">
+    <children>
+        <ImageView fx:id="backgroundImage" fitHeight="700.0" fitWidth="500.0" layoutX="-6.0" pickOnBounds="true" preserveRatio="true" />
+        <Rectangle arcWidth="5.0" fill="WHITE" height="700.0" layoutX="494.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="510.0" />
+        <ImageView fx:id="logoImage" fitHeight="128.0" fitWidth="128.0" layoutX="190.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="registerTitleImage" fitHeight="100.0" fitWidth="300.0" layoutX="555.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true" />
+        <TextField fx:id="tnome" layoutX="585.0" layoutY="215.0" prefHeight="48.0" prefWidth="329.0" promptText="Username" />
+        <PasswordField fx:id="tsenha" layoutX="585.0" layoutY="342.0" prefHeight="48.0" prefWidth="329.0" promptText="Password" />
+        <Button layoutX="795.0" layoutY="430.0" mnemonicParsing="false" onAction="#handleSubmitButton" prefHeight="48.0" prefWidth="119.0" style="-fx-background-color: #c14cb7;" text="Submit" textFill="WHITE">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Button>
+        <Button fx:id="backButton" layoutX="4.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: transparent;">
+            <graphic>
+                <ImageView fx:id="backButtonImage" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
+            </graphic>
+        </Button>
+    </children>
+</AnchorPane>

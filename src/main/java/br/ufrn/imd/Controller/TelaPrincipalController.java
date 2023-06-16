@@ -328,4 +328,8 @@ public class TelaPrincipalController implements Initializable {
             timer.cancel();
         }
     }
+
+    public void menuSair(ActionEvent actionEvent) {
+        Main.changeScreen("login");
+    }
 }
