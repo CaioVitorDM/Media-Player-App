@@ -13,13 +13,15 @@ public class Main extends Application {
 
     //Declaração da janela, telas e singleton
     private static Stage stage;
-    private static Scene loginScene;
+    private static Scene TelaLoginScene;
     private static Scene TelaPrincipalScene;
     private static Scene TelaPrincipalComumScene;
     private static Scene TelaCadastroComumScene;
     private static Scene TelaCadastroVIPScene;
     private static Scene TelaRemoverUsuarioScene;
     private static Scene TelaListagemUsuariosScene;
+    private static String userName;
+    private static boolean isUserCommon;
 
     private static UsuariosDAO usuariosDAO;
 
@@ -30,7 +32,7 @@ public class Main extends Application {
 
         //Cash de todas as telas do programa.
         Parent fxmlLogin = FXMLLoader.load((getClass().getResource("TelaLogin.fxml")));
-        loginScene = new Scene(fxmlLogin);
+        TelaLoginScene = new Scene(fxmlLogin);
 
         Parent fxmlTelaPrincipal = FXMLLoader.load((getClass().getResource("TelaPrincipal.fxml")));
         TelaPrincipalScene = new Scene(fxmlTelaPrincipal);
@@ -53,7 +55,7 @@ public class Main extends Application {
         //Definições padrões da janela
         primaryStage.setTitle("Media Player App");
         primaryStage.setResizable(false);
-        primaryStage.setScene(loginScene);
+        primaryStage.setScene(TelaLoginScene);
         primaryStage.show();
 
         //Definindo uma operação de fechar padrão para a janela que vai funcionar em todas as telas
@@ -71,10 +73,26 @@ public class Main extends Application {
         });
     }
 
+    public static void setUserName(String name){
+        userName = name;
+    }
+
+    public static String getUserName(){
+        return userName;
+    }
+
+    public static void setIsUserCommon(boolean condition){
+        isUserCommon = condition;
+    }
+
+    public static boolean isUserCommon(){
+        return isUserCommon;
+    }
+
     public static void changeScreen(String screen){
         switch (screen){
             case "login":
-                stage.setScene(loginScene);
+                stage.setScene(TelaLoginScene);
                 break;
             case "TelaPrincipal":
                 stage.setScene(TelaPrincipalScene);

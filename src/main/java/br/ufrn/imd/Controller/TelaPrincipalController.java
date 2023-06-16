@@ -39,6 +39,7 @@ public class TelaPrincipalController implements Initializable {
     private TimerTask task;
     private boolean isPlaying;
     private boolean running;
+    private boolean isMuted;
 
     //Trazendo os elementos da tela
     @FXML
@@ -46,13 +47,13 @@ public class TelaPrincipalController implements Initializable {
     @FXML
     private ListView<String> musicListView;
     @FXML
-    private Button playButton, nextButton, previousButton, stopButton, selectDirectoryButton;
+    private Button playButton, nextButton, previousButton, stopButton, selectDirectoryButton, removeMusicButton, clearMusicsButton, muteButton;
 
     @FXML
-    private ImageView playButtonImage, nextButtonImage, previousButtonImage;
+    private ImageView playButtonImage, nextButtonImage, previousButtonImage, backgroundImage, selectDirectoryImage, removeMusicImage, clearMusicsImage, muteButtonImage;
 
     //Criação das imagens
-    private Image playImage, stopImage, nextButtonImg, previousButtonImg;
+    private Image playImage, stopImage, nextButtonImg, previousButtonImg, backgroundImg, selectDirectoryImg, removeMusicImg, clearMusicsImg, muteButtonImg, unmuteButtonImg;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         usuariosDAO = UsuariosDAO.getInstance();
@@ -76,10 +77,21 @@ public class TelaPrincipalController implements Initializable {
         stopImage = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/stop-button.png");
         nextButtonImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/next.png");
         previousButtonImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/previous.png");
+        backgroundImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/gradient.png");
+        selectDirectoryImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/playlist.png");
+        removeMusicImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/remove.png");
+        clearMusicsImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/clear.png");
+        unmuteButtonImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/unmute.png");
+        muteButtonImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/mute.png");
 
         playButtonImage.setImage(playImage);
         nextButtonImage.setImage(nextButtonImg);
         previousButtonImage.setImage(previousButtonImg);
+        backgroundImage.setImage(backgroundImg);
+        selectDirectoryImage.setImage(selectDirectoryImg);
+        removeMusicImage.setImage(removeMusicImg);
+        clearMusicsImage.setImage(clearMusicsImg);
+        muteButtonImage.setImage(unmuteButtonImg);
     }
 
     //Definição das funções dos itens de menu
@@ -100,6 +112,48 @@ public class TelaPrincipalController implements Initializable {
 
 
     //Definição da função dos botões
+
+    @FXML
+    public void muteButtonClicked(ActionEvent actionEvent) {
+        if(musicListItems.isEmpty()){
+
+        }
+        else {
+            if (isMuted) {
+                isMuted = false;
+                muteButtonImage.setImage(unmuteButtonImg);
+                mediaPlayer.setVolume(100.00);
+            } else {
+                isMuted = true;
+                muteButtonImage.setImage(muteButtonImg);
+                mediaPlayer.setVolume(0.0);
+            }
+        }
+    }
+
+    @FXML
+    public void removeMusicClicked(ActionEvent actionEvent) {
+        if(musicListItems.isEmpty()){
+
+        }
+        else {
+            songs.remove(currentMusicIndex);
+            musicListItems.remove(currentMusicIndex);
+        }
+    }
+
+    @FXML
+    public void clearMusicsClicked(ActionEvent actionEvent) {
+        if(musicListItems.isEmpty()){
+
+        }
+        else {
+            songs.clear();
+            musicListItems.clear();
+            mediaPlayer.stop();
+        }
+    }
+
     @FXML
     private void playButtonClicked(ActionEvent event) {
         //checa se a lista de musicas está vazia
@@ -122,6 +176,9 @@ public class TelaPrincipalController implements Initializable {
                         System.out.println(songs.get(selectedIndex).getName().toLowerCase());
                     }
                     mediaPlayer = new MediaPlayer(media);
+                    isMuted = false;
+                    muteButtonImage.setImage(unmuteButtonImg);
+                    mediaPlayer.setVolume(100.0);
                     mediaPlayer.play();
                     isPlaying = true;
                     musicListView.getSelectionModel().select(selectedIndex);
@@ -134,37 +191,47 @@ public class TelaPrincipalController implements Initializable {
 
     @FXML
     private void nextButtonClicked(ActionEvent event){
-        if (currentMusicIndex < totalMusicCount - 1) {
-            if(running == true){
-                resetProgressBar();
+        if(musicListItems.isEmpty()){
+
+        }
+        else {
+            if (currentMusicIndex < totalMusicCount - 1) {
+                if (running == true) {
+                    resetProgressBar();
+                }
+                currentMusicIndex++;
+                mediaPlayer.stop();
+                media = new Media(songs.get(currentMusicIndex).toURI().toString());
+                mediaPlayer = new MediaPlayer(media);
+                mediaPlayer.play();
+                isPlaying = true;
+                playButtonImage.setImage(stopImage);
+                musicListView.getSelectionModel().select(currentMusicIndex);
+                startProgressBarTimer();
             }
-            currentMusicIndex++;
-            mediaPlayer.stop();
-            media = new Media(songs.get(currentMusicIndex).toURI().toString());
-            mediaPlayer = new MediaPlayer(media);
-            mediaPlayer.play();
-            isPlaying = true;
-            playButtonImage.setImage(stopImage);
-            musicListView.getSelectionModel().select(currentMusicIndex);
-            startProgressBarTimer();
         }
     }
 
     @FXML
     private void previousButtonClicked(ActionEvent event) {
-        if (currentMusicIndex > 0) {
-            if(running == true){
-                resetProgressBar();
+        if(musicListItems.isEmpty()){
+
+        }
+        else {
+            if (currentMusicIndex > 0) {
+                if (running == true) {
+                    resetProgressBar();
+                }
+                currentMusicIndex--;
+                mediaPlayer.stop();
+                media = new Media(songs.get(currentMusicIndex).toURI().toString());
+                mediaPlayer = new MediaPlayer(media);
+                mediaPlayer.play();
+                playButtonImage.setImage(stopImage);
+                isPlaying = true;
+                musicListView.getSelectionModel().select(currentMusicIndex);
+                startProgressBarTimer();
             }
-            currentMusicIndex--;
-            mediaPlayer.stop();
-            media = new Media(songs.get(currentMusicIndex).toURI().toString());
-            mediaPlayer = new MediaPlayer(media);
-            mediaPlayer.play();
-            playButtonImage.setImage(stopImage);
-            isPlaying = true;
-            musicListView.getSelectionModel().select(currentMusicIndex);
-            startProgressBarTimer();
         }
     }
 
@@ -241,10 +308,11 @@ public class TelaPrincipalController implements Initializable {
 
                 if(current/end == 1){
                     resetProgressBar();
+                    progressBar.setProgress(0);
                 }
             }
         };
-        timer.scheduleAtFixedRate(task, 1000, 1000);
+        timer.scheduleAtFixedRate(task, 300, 300);
 
     }
 

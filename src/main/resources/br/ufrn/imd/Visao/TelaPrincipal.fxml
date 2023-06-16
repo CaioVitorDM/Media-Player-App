@@ -9,15 +9,14 @@
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #4F6367;" xmlns:fxi="javafx.scene.image.*" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="br.ufrn.imd.Controller.TelaPrincipalController">
+<BorderPane prefHeight="700.0" prefWidth="1000.0" xmlns:fxi="javafx.scene.image.*" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.Controller.TelaPrincipalController">
    <top>
-      <MenuBar prefWidth="958.0" style="-fx-background-color: #B8D8D8;" BorderPane.alignment="CENTER">
+      <MenuBar prefWidth="958.0" style="-fx-background-color: #a8a3dc;" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="Cadastro">
             <items>
@@ -40,63 +39,90 @@
         </menus>
       </MenuBar>
    </top>
-   <right>
-      <ScrollPane fx:id="DirectorysPanel" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="820.0" prefWidth="200.0" style="-fx-background-color: #7A9E9F;" />
-        </content>
-      </ScrollPane>
-   </right>
    <bottom>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane style="-fx-background-color: #2b0255;" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="329.0" minWidth="10.0" prefWidth="197.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="617.0" minWidth="10.0" prefWidth="606.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.0" minWidth="10.0" prefWidth="193.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="59.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="25.0" minHeight="0.0" prefHeight="3.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ProgressBar fx:id="progressBar" prefHeight="22.0" prefWidth="344.0" progress="0.0" GridPane.columnIndex="1">
+            <ProgressBar fx:id="progressBar" prefHeight="11.0" prefWidth="605.0" progress="0.0" GridPane.columnIndex="1">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </ProgressBar>
-            <Button fx:id="previousButton" mnemonicParsing="false" onAction="#previousButtonClicked" style="-fx-background-color: #B8D8D8;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button fx:id="previousButton" mnemonicParsing="false" onAction="#previousButtonClicked" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets left="20.0" />
+                  <Insets left="180.0" top="-20.0" />
                </GridPane.margin>
                 <graphic>
-                    <ImageView fx:id="previousButtonImage" fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true" />
+                    <ImageView fx:id="previousButtonImage" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
                 </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
             </Button>
-             <Button fx:id="playButton" mnemonicParsing="false" onAction="#playButtonClicked" style="-fx-background-color: #B8D8D8;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+             <Button fx:id="playButton" mnemonicParsing="false" onAction="#playButtonClicked" prefHeight="35.0" prefWidth="51.0" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                  <GridPane.margin>
-                     <Insets left="150.0" />
+                     <Insets left="270.0" top="-20.0" />
                  </GridPane.margin>
                  <graphic>
-                     <ImageView fx:id="playButtonImage" fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true" />
+                     <ImageView fx:id="playButtonImage" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
                  </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
              </Button>
-            <Button fx:id="nextButton" mnemonicParsing="false" onAction="#nextButtonClicked" style="-fx-background-color: #B8D8D8;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button fx:id="nextButton" mnemonicParsing="false" onAction="#nextButtonClicked" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets left="280.0" right="20.0" />
+                  <Insets left="360.0" top="-20.0" />
                </GridPane.margin>
                 <graphic>
-                    <ImageView fx:id="nextButtonImage" fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true" />
+                    <ImageView fx:id="nextButtonImage" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
                 </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
             </Button>
-            <Button fx:id="selectDirectoryButton" mnemonicParsing="false" onAction="#selectDirectoryButtonClicked" style="-fx-background-color: #B8D8D8;" text="Select Directory" GridPane.rowIndex="1">
+            <Button fx:id="selectDirectoryButton" mnemonicParsing="false" onAction="#selectDirectoryButtonClicked" style="-fx-background-color: transparent;">
                <GridPane.margin>
-                  <Insets left="20.0" />
+                  <Insets left="2.0" top="-10.0" />
+               </GridPane.margin>
+               <graphic>
+                  <ImageView fx:id="selectDirectoryImage" fitHeight="28.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+            </Button>
+            <Button fx:id="removeMusicButton" mnemonicParsing="false" onAction="#removeMusicClicked" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fx:id="removeMusicImage" fitHeight="28.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+               <GridPane.margin>
+                  <Insets left="35.0" top="-10.0" />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="22.0" prefWidth="100.0" style="-fx-background-color: #B8D8D8;" text="Create Playlist" GridPane.columnIndex="2" GridPane.rowIndex="1">
+             <Button fx:id="clearMusicsButton" mnemonicParsing="false" onAction="#clearMusicsClicked" style="-fx-background-color: transparent;">
+                 <graphic>
+                     <ImageView fx:id="clearMusicsImage" fitHeight="28.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
+                 </graphic>
+                 <GridPane.margin>
+                     <Insets left="68.0" top="-10.0" />
+                 </GridPane.margin>
+             </Button>
+            <Button fx:id="muteButton" mnemonicParsing="false" onAction="#muteButtonClicked" prefHeight="35.0" prefWidth="51.0" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <graphic>
+                  <ImageView fx:id="muteButtonImage" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
                <GridPane.margin>
-                  <Insets left="215.0" right="20.0" />
+                  <Insets left="500.0" top="-20.0" />
                </GridPane.margin>
             </Button>
          </children>
@@ -105,8 +131,39 @@
    <left>
        <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
-            <ListView fx:id="musicListView" prefHeight="821.0" prefWidth="200.0" />
+            <ListView fx:id="musicListView" prefHeight="577.0" prefWidth="200.0" />
          </content>
        </ScrollPane>
    </left>
+   <center>
+
+      <ImageView fx:id="backgroundImage" fitHeight="593.0" fitWidth="600.0" BorderPane.alignment="CENTER" />
+
+   </center>
+   <right>
+      <GridPane style="-fx-background-color: #722584;" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="0.0" prefWidth="0.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="200.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="396.0" minHeight="10.0" prefHeight="288.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="396.0" minHeight="0.0" prefHeight="53.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="343.0" minHeight="0.0" prefHeight="252.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="275.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <content>
+                  <ListView prefHeight="827.0" prefWidth="200.0" />
+               </content>
+            </ScrollPane>
+            <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <content>
+                  <ListView prefHeight="484.0" prefWidth="200.0" />
+               </content>
+            </ScrollPane>
+         </children>
+      </GridPane>
+   </right>
 </BorderPane>

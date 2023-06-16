@@ -35,8 +35,14 @@ public class TelaListagemUsuariosController implements Initializable {
     }
 
     public void handleBackButton(ActionEvent actionEvent) {
-        atualizarListaUsuarios();
-        Main.changeScreen("TelaPrincipal");
+        if(Main.isUserCommon()){
+            atualizarListaUsuarios();
+            Main.changeScreen("TelaPrincipalComum");
+        }
+        else {
+            atualizarListaUsuarios();
+            Main.changeScreen("TelaPrincipal");
+        }
     }
 
     public void handleButtonRefresh(ActionEvent actionEvent){

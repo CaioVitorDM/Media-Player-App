@@ -28,6 +28,7 @@ public class LoginController implements Initializable {
     }
     public void buttonSubmeter(ActionEvent actionEvent) throws IOException {
         if (usuariosDAO.loginUser(tnome.getText(), tsenha.getText())) {
+            Main.setUserName(tnome.getText());
             // Checagem para saber de qual tipo é o usuário e qual vai ser sua tela
             if (usuariosDAO.isUserVIP(tnome.getText(), tsenha.getText())) {
                 // Carregar tela para usuário VIP
@@ -38,6 +39,7 @@ public class LoginController implements Initializable {
 
             } else {
                 // Carregar tela para usuário comum
+                Main.setIsUserCommon(true);
                 Main.changeScreen("TelaPrincipalComum");
             }
         }
