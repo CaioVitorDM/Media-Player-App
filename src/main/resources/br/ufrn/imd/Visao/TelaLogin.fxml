@@ -17,7 +17,7 @@
       <ImageView fx:id="loginTitleImage" fitHeight="100.0" fitWidth="300.0" layoutX="544.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" />
       <TextField fx:id="tnome" layoutX="585.0" layoutY="215.0" prefHeight="48.0" prefWidth="329.0" promptText="Username" />
       <PasswordField fx:id="tsenha" layoutX="585.0" layoutY="342.0" prefHeight="48.0" prefWidth="329.0" promptText="Password" />
-      <Button layoutX="795.0" layoutY="430.0" mnemonicParsing="false" onAction="#buttonSubmeter" prefHeight="48.0" prefWidth="119.0" style="-fx-background-color: #c14cb7;" text="Sign In" textFill="WHITE">
+      <Button layoutX="795.0" layoutY="430.0" mnemonicParsing="false" onAction="#buttonSubmeter" prefHeight="48.0" prefWidth="119.0" style="-fx-background-color: #c14cb7; -fx-cursor: hand" text="Sign In" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>

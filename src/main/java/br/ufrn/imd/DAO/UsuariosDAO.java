@@ -135,7 +135,16 @@ public class UsuariosDAO {
     public ObservableList<String> getNomesUsuarios() {
         ObservableList<String> nomesUsuarios = FXCollections.observableArrayList();
         for (Usuario usuario : listaUsuarios) {
-            nomesUsuarios.add(usuario.getNomeusuario());
+            if(isUserVIP(usuario.getNomeusuario(), usuario.getSenha())){
+                nomesUsuarios.add(usuario.getNomeusuario() + " - VIP");
+            }
+            else if(isUserAdmin(usuario.getNomeusuario(), usuario.getSenha())){
+                nomesUsuarios.add(usuario.getNomeusuario());
+            }
+            else{
+                nomesUsuarios.add(usuario.getNomeusuario() + " - Common");
+            }
+
         }
         return nomesUsuarios;
     }

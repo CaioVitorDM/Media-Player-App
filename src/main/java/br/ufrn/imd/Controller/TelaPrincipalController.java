@@ -1,6 +1,8 @@
 package br.ufrn.imd.Controller;
 
+import br.ufrn.imd.DAO.PlaylistDAO;
 import br.ufrn.imd.DAO.UsuariosDAO;
+import br.ufrn.imd.Modelo.Playlist;
 import br.ufrn.imd.Visao.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,9 +26,11 @@ import java.util.TimerTask;
 
 public class TelaPrincipalController implements Initializable {
     private static UsuariosDAO usuariosDAO;
-
+    private static PlaylistDAO playlistDAO;
     private ObservableList<String> musicListItems;
+    private ObservableList<String> playlistListItems, listaPlaylists;
     private int currentMusicIndex;
+    private int currentPlaylistIndex;
     private int totalMusicCount = 0;
 
     private File directory;
@@ -45,23 +49,35 @@ public class TelaPrincipalController implements Initializable {
     @FXML
     private ProgressBar progressBar;
     @FXML
-    private ListView<String> musicListView;
+    private ListView<String> musicListView, playlistListView;
     @FXML
-    private Button playButton, nextButton, previousButton, stopButton, selectDirectoryButton, removeMusicButton, clearMusicsButton, muteButton;
+    private Button playButton, nextButton, previousButton, stopButton, selectDirectoryButton, removeMusicButton, clearMusicsButton, muteButton, refreshPlaylistButton;
+    @FXML
+    private Button registerUserButton, registerVIPButton, removeUserButton, listUserButton, signOutButton, removeMusicPlaylistButton, clearMusicPlaylistButton;
 
     @FXML
-    private ImageView playButtonImage, nextButtonImage, previousButtonImage, backgroundImage, selectDirectoryImage, removeMusicImage, clearMusicsImage, muteButtonImage;
+    private ImageView playButtonImage, nextButtonImage, previousButtonImage, backgroundImage, selectDirectoryImage, removeMusicImage, clearMusicsImage, muteButtonImage, vinylImage, refreshPlaylistImage;
+    @FXML
+    private ImageView addPlaylistImage, removePlaylistImage, clearPlaylistsImage, registerUserImage, registerVIPImage, userImage, listUserImage, removeUserImage, signOutImage, removeMusicPlaylistImage, clearMusicPlaylistImage;
 
     //Criação das imagens
     private Image playImage, stopImage, nextButtonImg, previousButtonImg, backgroundImg, selectDirectoryImg, removeMusicImg, clearMusicsImg, muteButtonImg, unmuteButtonImg;
+    private Image registerUserImg, registerVIPImg, userImg, removeUserImg, listUserImg, signOutImg, addPlaylistImg, vinylImg, refreshPlaylistImg;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         usuariosDAO = UsuariosDAO.getInstance();
         usuariosDAO.carregarUsuarios();
 
+        playlistDAO = PlaylistDAO.getInstance();
+        playlistDAO.carregarPlaylists();
+
+
         songs = new ArrayList<File>();
         directory = new File("");
         currentDirectoryFiles = directory.listFiles();
+
+        listaPlaylists = playlistDAO.getPlaylistsNames();
+        playlistListView.setItems(listaPlaylists);
 
         isPlaying = false;
         musicListItems = FXCollections.observableArrayList();
@@ -69,6 +85,13 @@ public class TelaPrincipalController implements Initializable {
         musicListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (!musicListView.getSelectionModel().isEmpty()) {
                 currentMusicIndex = musicListView.getSelectionModel().getSelectedIndex();
+            }
+        });
+
+        playlistListItems = FXCollections.observableArrayList();
+        playlistListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (!playlistListView.getSelectionModel().isEmpty()) {
+                currentPlaylistIndex = playlistListView.getSelectionModel().getSelectedIndex();
             }
         });
 
@@ -83,6 +106,16 @@ public class TelaPrincipalController implements Initializable {
         clearMusicsImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/clear.png");
         unmuteButtonImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/unmute.png");
         muteButtonImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/mute.png");
+        registerUserImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/add-user.png");
+        registerVIPImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/premium.png");
+        removeUserImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/remove-user.png");
+        userImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/avatar.jpg");
+        listUserImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/list-user.png");
+        signOutImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/logout.png");
+        addPlaylistImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/add-playlist.png");
+        vinylImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/record-player.png");
+        refreshPlaylistImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/refresh.png");
+
 
         playButtonImage.setImage(playImage);
         nextButtonImage.setImage(nextButtonImg);
@@ -92,26 +125,50 @@ public class TelaPrincipalController implements Initializable {
         removeMusicImage.setImage(removeMusicImg);
         clearMusicsImage.setImage(clearMusicsImg);
         muteButtonImage.setImage(unmuteButtonImg);
+        addPlaylistImage.setImage(addPlaylistImg);
+        removePlaylistImage.setImage(removeMusicImg);
+        clearPlaylistsImage.setImage(clearMusicsImg);
+        registerUserImage.setImage(registerUserImg);
+        registerVIPImage.setImage(registerVIPImg);
+        removeUserImage.setImage(removeUserImg);
+        userImage.fitWidthProperty();
+        userImage.setImage(userImg);
+        listUserImage.setImage(listUserImg);
+        signOutImage.setImage(signOutImg);
+        removeMusicPlaylistImage.setImage(removeMusicImg);
+        clearMusicPlaylistImage.setImage(clearMusicsImg);
+        vinylImage.setImage(vinylImg);
+        refreshPlaylistImage.setImage(refreshPlaylistImg);
+
     }
 
-    //Definição das funções dos itens de menu
-    public void menuCadastrarComum(ActionEvent actionEvent) {
+    //Definição das funções dos botões de navegação do usuário VIP e Admin
+    public void handleRegisterUserButton(ActionEvent actionEvent) {
         Main.changeScreen("TelaCadastroComum");
     }
-
-    public void menuCadastrarVIP(ActionEvent actionEvent){
+    public void handleRegisterVIPButton(ActionEvent actionEvent){
         Main.changeScreen("TelaCadastroVIP");
     }
-
-    public void menuRemoverUsuario(ActionEvent actionEvent){
+    public void handleRemoveUserButton(ActionEvent actionEvent){
         Main.changeScreen("TelaRemoverUsuario");
     }
-    public void menuListagemUsuarios(ActionEvent actionEvent) {
+    public void handleListUserButton(ActionEvent actionEvent) {
         Main.changeScreen("TelaListagemUsuarios");
+    }
+    public void handleAddPlaylistButton(ActionEvent actionEvent) { Main.changeScreen("TelaCriarPlaylist"); }
+    public void handleSignOutButton(ActionEvent actionEvent) {
+        Main.changeScreen("login");
+        if(mediaPlayer != null && isPlaying){
+            mediaPlayer.stop();
+        }
     }
 
 
     //Definição da função dos botões
+    @FXML
+    private void handleRefreshPlaylistButton() {
+        listaPlaylists.setAll(playlistDAO.getPlaylistsNames());
+    }
 
     @FXML
     public void muteButtonClicked(ActionEvent actionEvent) {
@@ -327,9 +384,5 @@ public class TelaPrincipalController implements Initializable {
             running = false;
             timer.cancel();
         }
-    }
-
-    public void menuSair(ActionEvent actionEvent) {
-        Main.changeScreen("login");
     }
 }

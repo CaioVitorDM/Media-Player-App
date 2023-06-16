@@ -53,6 +53,7 @@ public class LoginController implements Initializable {
             // Checagem para saber de qual tipo é o usuário e qual vai ser sua tela
             if (usuariosDAO.isUserVIP(tnome.getText(), tsenha.getText()) || usuariosDAO.isUserAdmin(tnome.getText(), tsenha.getText())) {
                 // Carregar tela para usuário VIP
+                Main.setIsUserCommon(false);
                 Main.changeScreen("TelaPrincipal");
             }
             else {

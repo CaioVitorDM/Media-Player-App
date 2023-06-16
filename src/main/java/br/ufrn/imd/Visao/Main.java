@@ -1,5 +1,6 @@
 package br.ufrn.imd.Visao;
 
+import br.ufrn.imd.DAO.PlaylistDAO;
 import br.ufrn.imd.DAO.UsuariosDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -20,10 +21,12 @@ public class Main extends Application {
     private static Scene TelaCadastroVIPScene;
     private static Scene TelaRemoverUsuarioScene;
     private static Scene TelaListagemUsuariosScene;
+    private static Scene TelaCriarPlaylistScene;
     private static String userName;
     private static boolean isUserCommon;
 
     private static UsuariosDAO usuariosDAO;
+    private static PlaylistDAO playlistDAO;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -52,6 +55,9 @@ public class Main extends Application {
         Parent fxmlTelaListagemUsuarios = FXMLLoader.load((getClass().getResource("TelaListagemUsuarios.fxml")));
         TelaListagemUsuariosScene = new Scene(fxmlTelaListagemUsuarios );
 
+        Parent fxmlTelaCriarPlaylist = FXMLLoader.load((getClass().getResource("TelaCriarPlaylist.fxml")));
+        TelaCriarPlaylistScene  = new Scene(fxmlTelaCriarPlaylist );
+
         //Definições padrões da janela
         primaryStage.setTitle("Media Player App");
         primaryStage.setResizable(false);
@@ -62,6 +68,10 @@ public class Main extends Application {
         stage.setOnCloseRequest(event -> {
             usuariosDAO = UsuariosDAO.getInstance();
             usuariosDAO.salvarUsuarios();
+            if(!isUserCommon()){
+                playlistDAO = PlaylistDAO.getInstance();
+                playlistDAO.salvarPlaylists();
+            }
             try {
                 System.out.println("Fechando o sistema...");
                 Thread.sleep(500);
@@ -111,6 +121,9 @@ public class Main extends Application {
                 break;
             case "TelaListagemUsuarios":
                 stage.setScene(TelaListagemUsuariosScene);
+                break;
+            case "TelaCriarPlaylist":
+                stage.setScene(TelaCriarPlaylistScene);
                 break;
 
         }

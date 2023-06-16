@@ -7,12 +7,12 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.Controller.TelaRemoverUsuarioController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.Controller.TelaCriarPlaylistController">
     <children>
         <ImageView fx:id="backgroundImage" fitHeight="700.0" fitWidth="500.0" layoutX="-6.0" pickOnBounds="true" preserveRatio="true" />
         <Rectangle arcWidth="5.0" fill="WHITE" height="700.0" layoutX="494.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="510.0" />
         <ImageView fx:id="logoImage" fitHeight="128.0" fitWidth="128.0" layoutX="190.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="removeTitleImage" fitHeight="100.0" fitWidth="300.0" layoutX="555.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="registerTitleImage" fitHeight="100.0" fitWidth="300.0" layoutX="555.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true" />
         <TextField fx:id="tnome" layoutX="585.0" layoutY="228.0" prefHeight="48.0" prefWidth="329.0" promptText="Username" />
         <Button layoutX="795.0" layoutY="430.0" mnemonicParsing="false" onAction="#handleSubmitButton" prefHeight="48.0" prefWidth="119.0" style="-fx-background-color: #c14cb7; -fx-cursor: hand" text="Submit" textFill="WHITE">
             <font>

@@ -93,6 +93,7 @@ public class TelaPrincipalComumController implements Initializable {
         removeMusicImage.setImage(removeMusicImg);
         clearMusicsImage.setImage(clearMusicsImg);
         muteButtonImage.setImage(unmuteButtonImg);
+
     }
 
     //Definição das funções dos itens de menu
@@ -320,5 +321,6 @@ public class TelaPrincipalComumController implements Initializable {
     }
     public void menuSair(ActionEvent actionEvent) {
         Main.changeScreen("login");
+        mediaPlayer.stop();
     }
 }

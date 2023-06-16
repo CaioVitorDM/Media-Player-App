@@ -22,7 +22,6 @@ import java.util.ResourceBundle;
 public class TelaListagemUsuariosController implements Initializable {
     @FXML
     private ListView<String> tabela;
-
     @FXML
     private Button backButton, refreshButton;
     @FXML

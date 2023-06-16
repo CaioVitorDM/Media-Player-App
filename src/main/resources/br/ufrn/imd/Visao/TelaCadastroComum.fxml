@@ -16,12 +16,12 @@
         <ImageView fx:id="registerTitleImage" fitHeight="100.0" fitWidth="300.0" layoutX="555.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true" />
         <TextField fx:id="tnome" layoutX="585.0" layoutY="215.0" prefHeight="48.0" prefWidth="329.0" promptText="Username" />
         <PasswordField fx:id="tsenha" layoutX="585.0" layoutY="342.0" prefHeight="48.0" prefWidth="329.0" promptText="Password" />
-        <Button layoutX="795.0" layoutY="430.0" mnemonicParsing="false" onAction="#handleSubmitButton" prefHeight="48.0" prefWidth="119.0" style="-fx-background-color: #c14cb7;" text="Submit" textFill="WHITE">
+        <Button layoutX="795.0" layoutY="430.0" mnemonicParsing="false" onAction="#handleSubmitButton" prefHeight="48.0" prefWidth="119.0" style="-fx-background-color: #c14cb7; -fx-cursor: hand" text="Submit" textFill="WHITE">
             <font>
                 <Font size="15.0" />
             </font>
         </Button>
-      <Button fx:id="backButton" layoutX="4.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: transparent;">
+      <Button fx:id="backButton" layoutX="4.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: transparent; -fx-cursor: hand">
          <graphic>
             <ImageView fx:id="backButtonImage" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
