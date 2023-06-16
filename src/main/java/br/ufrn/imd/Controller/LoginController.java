@@ -51,14 +51,11 @@ public class LoginController implements Initializable {
         if (usuariosDAO.loginUser(tnome.getText(), tsenha.getText())) {
             Main.setUserName(tnome.getText());
             // Checagem para saber de qual tipo é o usuário e qual vai ser sua tela
-            if (usuariosDAO.isUserVIP(tnome.getText(), tsenha.getText())) {
+            if (usuariosDAO.isUserVIP(tnome.getText(), tsenha.getText()) || usuariosDAO.isUserAdmin(tnome.getText(), tsenha.getText())) {
                 // Carregar tela para usuário VIP
                 Main.changeScreen("TelaPrincipal");
-            } else if (usuariosDAO.isUserAdmin(tnome.getText(), tsenha.getText())) {
-                // Carregar tela para usuário admin\
-                Main.changeScreen("TelaPrincipal");
-
-            } else {
+            }
+            else {
                 // Carregar tela para usuário comum
                 Main.setIsUserCommon(true);
                 Main.changeScreen("TelaPrincipalComum");
