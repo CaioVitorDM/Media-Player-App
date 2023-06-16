@@ -49,6 +49,7 @@ public class TelaPrincipalComumController implements Initializable {
     @FXML
     private Button playButton, nextButton, previousButton, stopButton, selectDirectoryButton, removeMusicButton, clearMusicsButton, muteButton;
 
+
     @FXML
     private ImageView playButtonImage, nextButtonImage, previousButtonImage, backgroundImage, selectDirectoryImage, removeMusicImage, clearMusicsImage, muteButtonImage;
 
@@ -128,6 +129,12 @@ public class TelaPrincipalComumController implements Initializable {
         else {
             songs.remove(currentMusicIndex);
             musicListItems.remove(currentMusicIndex);
+            if(currentMusicIndex - 1 <= 0){
+                currentMusicIndex = 0;
+            }
+            else{
+                currentMusicIndex--;
+            }
         }
     }
 

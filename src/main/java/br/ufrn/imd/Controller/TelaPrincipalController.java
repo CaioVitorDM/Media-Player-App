@@ -139,6 +139,12 @@ public class TelaPrincipalController implements Initializable {
         else {
             songs.remove(currentMusicIndex);
             musicListItems.remove(currentMusicIndex);
+            if(currentMusicIndex - 1 <= 0){
+                currentMusicIndex = 0;
+            }
+            else{
+                currentMusicIndex--;
+            }
         }
     }
 
