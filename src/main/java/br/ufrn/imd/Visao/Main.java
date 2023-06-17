@@ -65,7 +65,7 @@ public class Main extends Application {
         //Definições padrões da janela
         primaryStage.setTitle("Media Player App");
         primaryStage.setResizable(false);
-        primaryStage.setScene(TelaPrincipalComumScene);
+        primaryStage.setScene(TelaLoginScene);
         primaryStage.show();
 
         //Definindo uma operação de fechar padrão para a janela que vai funcionar em todas as telas

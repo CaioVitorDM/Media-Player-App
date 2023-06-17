@@ -208,6 +208,9 @@ public class TelaPrincipalController implements Initializable {
             else{
                 currentMusicIndex--;
             }
+            if(musicListItems.isEmpty() && isPlaying){
+                mediaPlayer.stop();
+            }
         }
     }
 
@@ -219,7 +222,9 @@ public class TelaPrincipalController implements Initializable {
         else {
             songs.clear();
             musicListItems.clear();
-            mediaPlayer.stop();
+            if(musicListItems.isEmpty() && songs.isEmpty() && isPlaying){
+                mediaPlayer.stop();
+            }
         }
     }
 

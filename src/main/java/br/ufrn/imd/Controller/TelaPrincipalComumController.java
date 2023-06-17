@@ -160,12 +160,12 @@ public class TelaPrincipalComumController implements Initializable {
         if(musicListItems.isEmpty()){
 
         }
-        if(isPlaying){
-            mediaPlayer.stop();
-        }
         else {
             songs.clear();
             musicListItems.clear();
+            if(musicListItems.isEmpty() && songs.isEmpty() && isPlaying){
+                mediaPlayer.stop();
+            }
         }
     }
 
