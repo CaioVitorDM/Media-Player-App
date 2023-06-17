@@ -4,13 +4,12 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.control.Slider?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.Controller.TelaPrincipalController">
    <children>
-      <ImageView fx:id="backgroundImage" fitHeight="700.0" fitWidth="1007.0" layoutX="14.0" layoutY="-8.0" />
+      <ImageView fx:id="backgroundImage" fitHeight="700.0" fitWidth="1007.0" layoutX="-4.0" />
       <ProgressBar fx:id="progressBar" layoutX="198.0" layoutY="582.0" prefHeight="11.0" prefWidth="605.0" progress="0.0">
          <opaqueInsets>
             <Insets />
@@ -63,21 +62,15 @@
          </opaqueInsets>
       </Button>
       <ListView fx:id="musicListView" layoutX="33.0" layoutY="42.0" prefHeight="248.0" prefWidth="200.0" />
-      <Slider fx:id="volumeSlider" layoutX="233.0" layoutY="617.0" prefHeight="14.0" prefWidth="112.0" style="-fx-cursor: hand" />
       <ListView fx:id="playlistListView" layoutX="33.0" layoutY="358.0" prefHeight="160.0" prefWidth="200.0" />
       <Button fx:id="addPlaylistButton" layoutX="33.0" layoutY="524.0" mnemonicParsing="false" onAction="#handleAddPlaylistButton" style="-fx-background-color: transparent; -fx-cursor: hand">
          <graphic>
             <ImageView fx:id="addPlaylistImage" fitHeight="28.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
-      <Button fx:id="removePlaylistButton" layoutX="64.0" layoutY="524.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="50.0" style="-fx-background-color: transparent; -fx-cursor: hand">
+      <Button fx:id="removePlaylistButton" layoutX="64.0" layoutY="524.0" mnemonicParsing="false" onAction="#handleRemovePlaylistButton" prefHeight="36.0" prefWidth="50.0" style="-fx-background-color: transparent; -fx-cursor: hand">
          <graphic>
             <ImageView fx:id="removePlaylistImage" fitHeight="28.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
-         </graphic>
-      </Button>
-      <Button fx:id="clearPlaylistButton" layoutX="102.0" layoutY="524.0" mnemonicParsing="false" onAction="#clearMusicsClicked" style="-fx-background-color: transparent; -fx-cursor: hand">
-         <graphic>
-            <ImageView fx:id="clearPlaylistsImage" fitHeight="28.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
       <ListView layoutX="767.0" layoutY="290.0" prefHeight="230.0" prefWidth="200.0" />
@@ -90,7 +83,7 @@
             <Insets />
          </opaqueInsets>
       </Button>
-      <Button fx:id="registerVIPButton" layoutX="897.0" layoutY="148.0" mnemonicParsing="false" onAction="#handleRegisterVIPButton" prefWidth="50.0" style="-fx-background-color: transparent; -fx-cursor: hand">
+      <Button fx:id="registerVIPButton" layoutX="886.0" layoutY="148.0" mnemonicParsing="false" onAction="#handleRegisterVIPButton" prefWidth="50.0" style="-fx-background-color: transparent; -fx-cursor: hand">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -98,7 +91,7 @@
             <ImageView fx:id="registerVIPImage" fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
-      <Button fx:id="removeUserButton" layoutX="936.0" layoutY="148.0" mnemonicParsing="false" onAction="#handleRemoveUserButton" prefWidth="50.0" style="-fx-background-color: transparent; -fx-cursor: hand">
+      <Button fx:id="removeUserButton" layoutX="922.0" layoutY="148.0" mnemonicParsing="false" onAction="#handleRemoveUserButton" prefWidth="50.0" style="-fx-background-color: transparent; -fx-cursor: hand">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -106,7 +99,7 @@
             <ImageView fx:id="removeUserImage" fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
-      <Button fx:id="listUserButton" layoutX="856.0" layoutY="181.0" mnemonicParsing="false" onAction="#handleListUserButton" prefWidth="50.0" style="-fx-background-color: transparent; -fx-cursor: hand">
+      <Button fx:id="listUserButton" layoutX="854.0" layoutY="181.0" mnemonicParsing="false" onAction="#handleListUserButton" prefWidth="50.0" style="-fx-background-color: transparent; -fx-cursor: hand">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -114,7 +107,7 @@
             <ImageView fx:id="listUserImage" fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
-      <Button fx:id="signOutButton" layoutX="897.0" layoutY="181.0" mnemonicParsing="false" onAction="#handleSignOutButton" prefWidth="50.0" style="-fx-background-color: transparent; -fx-cursor: hand">
+      <Button fx:id="signOutButton" layoutX="886.0" layoutY="181.0" mnemonicParsing="false" onAction="#handleSignOutButton" prefWidth="50.0" style="-fx-background-color: transparent; -fx-cursor: hand">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -133,10 +126,9 @@
          </graphic>
       </Button>
       <ImageView fx:id="vinylImage" fitHeight="373.0" fitWidth="370.0" layoutX="322.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="refreshPlaylistButton" layoutX="133.0" layoutY="524.0" mnemonicParsing="false" onAction="#handleRefreshPlaylistButton" style="-fx-background-color: transparent; -fx-cursor: hand">
+      <Button fx:id="refreshPlaylistButton" layoutX="108.0" layoutY="524.0" mnemonicParsing="false" onAction="#handleRefreshPlaylistButton" style="-fx-background-color: transparent; -fx-cursor: hand">
          <graphic>
             <ImageView fx:id="refreshPlaylistImage" fitHeight="28.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
-         </graphic>
-      </Button>
+         </graphic></Button>
    </children>
 </AnchorPane>

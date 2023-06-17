@@ -51,14 +51,14 @@ public class TelaPrincipalController implements Initializable {
     @FXML
     private ListView<String> musicListView, playlistListView;
     @FXML
-    private Button playButton, nextButton, previousButton, stopButton, selectDirectoryButton, removeMusicButton, clearMusicsButton, muteButton, refreshPlaylistButton;
+    private Button playButton, nextButton, previousButton, stopButton, selectDirectoryButton, removeMusicButton, clearMusicsButton, muteButton, refreshPlaylistButton, removePlaylistButton;
     @FXML
     private Button registerUserButton, registerVIPButton, removeUserButton, listUserButton, signOutButton, removeMusicPlaylistButton, clearMusicPlaylistButton;
 
     @FXML
     private ImageView playButtonImage, nextButtonImage, previousButtonImage, backgroundImage, selectDirectoryImage, removeMusicImage, clearMusicsImage, muteButtonImage, vinylImage, refreshPlaylistImage;
     @FXML
-    private ImageView addPlaylistImage, removePlaylistImage, clearPlaylistsImage, registerUserImage, registerVIPImage, userImage, listUserImage, removeUserImage, signOutImage, removeMusicPlaylistImage, clearMusicPlaylistImage;
+    private ImageView addPlaylistImage, removePlaylistImage, registerUserImage, registerVIPImage, userImage, listUserImage, removeUserImage, signOutImage, removeMusicPlaylistImage, clearMusicPlaylistImage;
 
     //Criação das imagens
     private Image playImage, stopImage, nextButtonImg, previousButtonImg, backgroundImg, selectDirectoryImg, removeMusicImg, clearMusicsImg, muteButtonImg, unmuteButtonImg;
@@ -127,7 +127,6 @@ public class TelaPrincipalController implements Initializable {
         muteButtonImage.setImage(unmuteButtonImg);
         addPlaylistImage.setImage(addPlaylistImg);
         removePlaylistImage.setImage(removeMusicImg);
-        clearPlaylistsImage.setImage(clearMusicsImg);
         registerUserImage.setImage(registerUserImg);
         registerVIPImage.setImage(registerVIPImg);
         removeUserImage.setImage(removeUserImg);
@@ -146,24 +145,31 @@ public class TelaPrincipalController implements Initializable {
     public void handleRegisterUserButton(ActionEvent actionEvent) {
         Main.changeScreen("TelaCadastroComum");
     }
-    public void handleRegisterVIPButton(ActionEvent actionEvent){
+    @FXML
+    private void handleRegisterVIPButton(ActionEvent actionEvent){
         Main.changeScreen("TelaCadastroVIP");
     }
-    public void handleRemoveUserButton(ActionEvent actionEvent){
+    @FXML
+    private void handleRemoveUserButton(ActionEvent actionEvent){
         Main.changeScreen("TelaRemoverUsuario");
     }
-    public void handleListUserButton(ActionEvent actionEvent) {
+    @FXML
+    private void handleListUserButton(ActionEvent actionEvent) {
         Main.changeScreen("TelaListagemUsuarios");
     }
-    public void handleAddPlaylistButton(ActionEvent actionEvent) { Main.changeScreen("TelaCriarPlaylist"); }
-    public void handleSignOutButton(ActionEvent actionEvent) {
+    @FXML
+    private void handleAddPlaylistButton(ActionEvent actionEvent) { Main.changeScreen("TelaCriarPlaylist"); }
+    @FXML
+    private void handleRemovePlaylistButton(ActionEvent actionEvent) { Main.changeScreen("TelaRemoverPlaylist"); }
+    @FXML
+    private void handleSignOutButton(ActionEvent actionEvent) {
         Main.changeScreen("login");
         if(mediaPlayer != null && isPlaying){
+            playlistDAO.salvarPlaylists();
+            usuariosDAO.salvarUsuarios();
             mediaPlayer.stop();
         }
     }
-
-
     //Definição da função dos botões
     @FXML
     private void handleRefreshPlaylistButton() {
@@ -385,4 +391,5 @@ public class TelaPrincipalController implements Initializable {
             timer.cancel();
         }
     }
+
 }

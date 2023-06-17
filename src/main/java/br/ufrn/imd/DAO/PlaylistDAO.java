@@ -29,19 +29,19 @@ public class PlaylistDAO {
 
     public boolean addPlaylist(Playlist playlist){
         for(int i = 0; i < playlists.size(); i++){
-            if(playlist.getPlaylistName().equals(playlists.get(i).getPlaylistName())){
+            if(playlist.getPlaylistName().equals(playlists.get(i).getPlaylistName()) && Main.getUserName().equals(playlists.get(i).getOwnerName())){
                 System.out.println("Playlist \u001B[33m" + playlist.getPlaylistName() + "\u001B[0m já foi cadastrada");
                 return false;
             }
         }
-        System.out.println("Usuário \u001B[36m" + playlist.getPlaylistName() + "\u001B[0m cadastrado com sucesso!");
+        System.out.println("Playlist \u001B[36m" + playlist.getPlaylistName() + "\u001B[0m cadastrada com sucesso!");
         playlists.add(playlist);
         return true;
     }
 
     public boolean removePlaylist(Playlist playlist){
         for(int i = 0; i < playlists.size(); i++){
-            if(playlist.getPlaylistName().equals(playlists.get(i).getPlaylistName())) {
+            if(playlist.getPlaylistName().equals(playlists.get(i).getPlaylistName()) && Main.getUserName().equals(playlists.get(i).getOwnerName())) {
                 playlists.remove(playlists.get(i));
                 System.out.println("Playlist \u001B[31m" + playlist.getPlaylistName() + "\u001B[0m removida com sucesso!");
                 return true;

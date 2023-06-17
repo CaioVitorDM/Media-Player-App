@@ -1,6 +1,8 @@
 package br.ufrn.imd.Controller;
 
+import br.ufrn.imd.DAO.PlaylistDAO;
 import br.ufrn.imd.DAO.UsuariosDAO;
+import br.ufrn.imd.Modelo.Playlist;
 import br.ufrn.imd.Visao.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,12 +25,9 @@ import java.util.TimerTask;
 
 
 public class TelaPrincipalComumController implements Initializable {
-    private static UsuariosDAO usuariosDAO;
-
     private ObservableList<String> musicListItems;
     private int currentMusicIndex;
     private int totalMusicCount = 0;
-
     private File directory;
     private File [] currentDirectoryFiles;
     private ArrayList<File> songs;
@@ -47,18 +46,14 @@ public class TelaPrincipalComumController implements Initializable {
     @FXML
     private ListView<String> musicListView;
     @FXML
-    private Button playButton, nextButton, previousButton, stopButton, selectDirectoryButton, removeMusicButton, clearMusicsButton, muteButton;
-
-
+    private Button playButton, nextButton, previousButton, stopButton, selectDirectoryButton, removeMusicButton, clearMusicsButton, muteButton, listUserButton, signOutButton;
     @FXML
-    private ImageView playButtonImage, nextButtonImage, previousButtonImage, backgroundImage, selectDirectoryImage, removeMusicImage, clearMusicsImage, muteButtonImage;
+    private ImageView playButtonImage, nextButtonImage, previousButtonImage, backgroundImage, selectDirectoryImage, removeMusicImage, clearMusicsImage, muteButtonImage, userImage, listUserImage, signOutImage;
 
     //Criação das imagens
-    private Image playImage, stopImage, nextButtonImg, previousButtonImg, backgroundImg, selectDirectoryImg, removeMusicImg, clearMusicsImg, muteButtonImg, unmuteButtonImg;
+    private Image playImage, stopImage, nextButtonImg, previousButtonImg, backgroundImg, selectDirectoryImg, removeMusicImg, clearMusicsImg, muteButtonImg, unmuteButtonImg,userImg, listUserImg, signOutImg;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        usuariosDAO = UsuariosDAO.getInstance();
-        usuariosDAO.carregarUsuarios();
 
         songs = new ArrayList<File>();
         directory = new File("");
@@ -73,7 +68,8 @@ public class TelaPrincipalComumController implements Initializable {
             }
         });
 
-        //Definição das imagens que aparecerão no botão do play
+
+        //Definição das imagens que aparecerão nos botões da tela
         playImage = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/play-button.png");
         stopImage = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/stop-button.png");
         nextButtonImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/next.png");
@@ -84,6 +80,10 @@ public class TelaPrincipalComumController implements Initializable {
         clearMusicsImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/clear.png");
         unmuteButtonImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/unmute.png");
         muteButtonImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/mute.png");
+        userImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/avatar.jpg");
+        listUserImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/list-user.png");
+        signOutImg = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/logout.png");
+
 
         playButtonImage.setImage(playImage);
         nextButtonImage.setImage(nextButtonImg);
@@ -93,15 +93,28 @@ public class TelaPrincipalComumController implements Initializable {
         removeMusicImage.setImage(removeMusicImg);
         clearMusicsImage.setImage(clearMusicsImg);
         muteButtonImage.setImage(unmuteButtonImg);
+        userImage.fitWidthProperty();
+        userImage.setImage(userImg);
+        listUserImage.setImage(listUserImg);
+        signOutImage.setImage(signOutImg);
 
     }
 
-    //Definição das funções dos itens de menu
-    public void menuListagemUsuarios(ActionEvent actionEvent) {
+    //Definição das funções dos botões de navegação do usuário VIP e Admin
+    public void handleRegisterUserButton(ActionEvent actionEvent) {
+        Main.changeScreen("TelaCadastroComum");
+    }
+    @FXML
+    private void handleListUserButton(ActionEvent actionEvent) {
         Main.changeScreen("TelaListagemUsuarios");
     }
-
-
+    @FXML
+    private void handleSignOutButton(ActionEvent actionEvent) {
+        Main.changeScreen("login");
+        if(mediaPlayer != null && isPlaying){
+            mediaPlayer.stop();
+        }
+    }
     //Definição da função dos botões
 
     @FXML
@@ -136,6 +149,9 @@ public class TelaPrincipalComumController implements Initializable {
             else{
                 currentMusicIndex--;
             }
+            if(musicListItems.isEmpty() && isPlaying){
+                mediaPlayer.stop();
+            }
         }
     }
 
@@ -144,10 +160,12 @@ public class TelaPrincipalComumController implements Initializable {
         if(musicListItems.isEmpty()){
 
         }
+        if(isPlaying){
+            mediaPlayer.stop();
+        }
         else {
             songs.clear();
             musicListItems.clear();
-            mediaPlayer.stop();
         }
     }
 
@@ -319,8 +337,5 @@ public class TelaPrincipalComumController implements Initializable {
             timer.cancel();
         }
     }
-    public void menuSair(ActionEvent actionEvent) {
-        Main.changeScreen("login");
-        mediaPlayer.stop();
-    }
+
 }

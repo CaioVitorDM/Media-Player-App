@@ -3,135 +3,81 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Slider?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<BorderPane prefHeight="700.0" prefWidth="1000.0" xmlns:fxi="javafx.scene.image.*" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.Controller.TelaPrincipalComumController">
-    <top>
-        <MenuBar prefWidth="958.0" style="-fx-background-color: #a8a3dc;" BorderPane.alignment="CENTER">
-            <menus>
-                <Menu mnemonicParsing="false" text="Listagem">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#menuListagemUsuarios" text="Listar usuários" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Sobre">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Ajuda" />
-                        <MenuItem mnemonicParsing="false" onAction="#menuSair" text="Sair" />
-                    </items>
-                </Menu>
-            </menus>
-        </MenuBar>
-    </top>
-    <bottom>
-        <GridPane style="-fx-background-color: #2b0255;" BorderPane.alignment="CENTER">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="329.0" minWidth="10.0" prefWidth="197.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="617.0" minWidth="10.0" prefWidth="606.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.0" minWidth="10.0" prefWidth="193.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="59.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="25.0" minHeight="0.0" prefHeight="3.0" vgrow="SOMETIMES" />
-            </rowConstraints>
-            <children>
-                <ProgressBar fx:id="progressBar" prefHeight="11.0" prefWidth="605.0" progress="0.0" GridPane.columnIndex="1">
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
-                </ProgressBar>
-                <Button fx:id="previousButton" mnemonicParsing="false" onAction="#previousButtonClicked" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                    <GridPane.margin>
-                        <Insets left="180.0" top="-20.0" />
-                    </GridPane.margin>
-                    <graphic>
-                        <ImageView fx:id="previousButtonImage" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
-                    </graphic>
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
-                </Button>
-                <Button fx:id="playButton" mnemonicParsing="false" onAction="#playButtonClicked" prefHeight="35.0" prefWidth="51.0" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                    <GridPane.margin>
-                        <Insets left="270.0" top="-20.0" />
-                    </GridPane.margin>
-                    <graphic>
-                        <ImageView fx:id="playButtonImage" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
-                    </graphic>
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
-                </Button>
-                <Button fx:id="nextButton" mnemonicParsing="false" onAction="#nextButtonClicked" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                    <GridPane.margin>
-                        <Insets left="360.0" top="-20.0" />
-                    </GridPane.margin>
-                    <graphic>
-                        <ImageView fx:id="nextButtonImage" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
-                    </graphic>
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
-                </Button>
-                <Button fx:id="selectDirectoryButton" mnemonicParsing="false" onAction="#selectDirectoryButtonClicked" style="-fx-background-color: transparent;">
-                    <GridPane.margin>
-                        <Insets left="2.0" top="-10.0" />
-                    </GridPane.margin>
-                    <graphic>
-                        <ImageView fx:id="selectDirectoryImage" fitHeight="28.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
-                    </graphic>
-                </Button>
-                <Button fx:id="removeMusicButton" mnemonicParsing="false" onAction="#removeMusicClicked" style="-fx-background-color: transparent;">
-                    <graphic>
-                        <ImageView fx:id="removeMusicImage" fitHeight="28.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
-                    </graphic>
-                    <GridPane.margin>
-                        <Insets left="35.0" top="-10.0" />
-                    </GridPane.margin>
-                </Button>
-                <Button fx:id="clearMusicsButton" mnemonicParsing="false" onAction="#clearMusicsClicked" style="-fx-background-color: transparent;">
-                    <graphic>
-                        <ImageView fx:id="clearMusicsImage" fitHeight="28.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
-                    </graphic>
-                    <GridPane.margin>
-                        <Insets left="68.0" top="-10.0" />
-                    </GridPane.margin>
-                </Button>
-                <Button fx:id="muteButton" mnemonicParsing="false" onAction="#muteButtonClicked" prefHeight="35.0" prefWidth="51.0" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                    <graphic>
-                        <ImageView fx:id="muteButtonImage" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
-                    </graphic>
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
-                    <GridPane.margin>
-                        <Insets left="500.0" top="-20.0" />
-                    </GridPane.margin>
-                </Button>
-            </children>
-        </GridPane>
-    </bottom>
-    <left>
-        <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <content>
-                <ListView fx:id="musicListView" prefHeight="577.0" prefWidth="200.0" />
-            </content>
-        </ScrollPane>
-    </left>
-    <center>
-
-        <ImageView fx:id="backgroundImage" fitHeight="593.0" fitWidth="800.0" BorderPane.alignment="CENTER" />
-
-    </center>
-</BorderPane>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.Controller.TelaPrincipalComumController">
+    <children>
+        <ImageView fx:id="backgroundImage" fitHeight="700.0" fitWidth="1007.0" layoutX="-4.0" />
+        <ProgressBar fx:id="progressBar" layoutX="198.0" layoutY="582.0" prefHeight="11.0" prefWidth="605.0" progress="0.0">
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+        </ProgressBar>
+        <Button fx:id="previousButton" layoutX="381.0" layoutY="605.0" mnemonicParsing="false" onAction="#previousButtonClicked" prefWidth="50.0" style="-fx-background-color: transparent; -fx-cursor: hand;">
+            <graphic>
+                <ImageView fx:id="previousButtonImage" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
+            </graphic>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+        </Button>
+        <Button fx:id="playButton" layoutX="474.0" layoutY="605.0" mnemonicParsing="false" onAction="#playButtonClicked" prefHeight="35.0" prefWidth="51.0" style="-fx-background-color: transparent; -fx-cursor: hand">
+            <graphic>
+                <ImageView fx:id="playButtonImage" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
+            </graphic>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+        </Button>
+        <Button fx:id="nextButton" layoutX="566.0" layoutY="605.0" mnemonicParsing="false" onAction="#nextButtonClicked" style="-fx-background-color: transparent; -fx-cursor: hand">
+            <graphic>
+                <ImageView fx:id="nextButtonImage" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
+            </graphic>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+        </Button>
+        <Button fx:id="selectDirectoryButton" layoutX="292.0" layoutY="458.0" mnemonicParsing="false" onAction="#selectDirectoryButtonClicked" style="-fx-background-color: transparent; -fx-cursor: hand">
+            <graphic>
+                <ImageView fx:id="selectDirectoryImage" fitHeight="28.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
+            </graphic>
+        </Button>
+        <Button fx:id="removeMusicButton" layoutX="323.0" layoutY="458.0" mnemonicParsing="false" onAction="#removeMusicClicked" prefHeight="36.0" prefWidth="50.0" style="-fx-background-color: transparent; -fx-cursor: hand">
+            <graphic>
+                <ImageView fx:id="removeMusicImage" fitHeight="28.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
+            </graphic></Button>
+        <Button fx:id="clearMusicsButton" layoutX="361.0" layoutY="458.0" mnemonicParsing="false" onAction="#clearMusicsClicked" style="-fx-background-color: transparent; -fx-cursor: hand">
+            <graphic>
+                <ImageView fx:id="clearMusicsImage" fitHeight="28.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
+            </graphic>
+        </Button>
+        <Button fx:id="muteButton" layoutX="692.0" layoutY="605.0" mnemonicParsing="false" onAction="#muteButtonClicked" prefHeight="35.0" prefWidth="51.0" style="-fx-background-color: transparent; -fx-cursor: hand">
+            <graphic>
+                <ImageView fx:id="muteButtonImage" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
+            </graphic>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+        </Button>
+        <ListView fx:id="musicListView" layoutX="292.0" layoutY="92.0" prefHeight="359.0" prefWidth="400.0" />
+        <ImageView fx:id="userImage" fitHeight="128.0" fitWidth="128.0" layoutX="858.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+        <Button fx:id="listUserButton" layoutX="858.0" layoutY="148.0" mnemonicParsing="false" onAction="#handleListUserButton" prefWidth="50.0" style="-fx-background-color: transparent; -fx-cursor: hand">
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <graphic>
+                <ImageView fx:id="listUserImage" fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+            </graphic>
+        </Button>
+        <Button fx:id="signOutButton" layoutX="897.0" layoutY="148.0" mnemonicParsing="false" onAction="#handleSignOutButton" prefWidth="50.0" style="-fx-background-color: transparent; -fx-cursor: hand">
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <graphic>
+                <ImageView fx:id="signOutImage" fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+            </graphic>
+        </Button>
+    </children>
+</AnchorPane>

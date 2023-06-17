@@ -22,6 +22,7 @@ public class Main extends Application {
     private static Scene TelaRemoverUsuarioScene;
     private static Scene TelaListagemUsuariosScene;
     private static Scene TelaCriarPlaylistScene;
+    private static Scene TelaRemoverPlaylistScene;
     private static String userName;
     private static boolean isUserCommon;
 
@@ -58,10 +59,13 @@ public class Main extends Application {
         Parent fxmlTelaCriarPlaylist = FXMLLoader.load((getClass().getResource("TelaCriarPlaylist.fxml")));
         TelaCriarPlaylistScene  = new Scene(fxmlTelaCriarPlaylist );
 
+        Parent fxmlTelaRemoverPlaylist = FXMLLoader.load((getClass().getResource("TelaRemoverPlaylist.fxml")));
+        TelaRemoverPlaylistScene  = new Scene(fxmlTelaRemoverPlaylist );
+
         //Definições padrões da janela
         primaryStage.setTitle("Media Player App");
         primaryStage.setResizable(false);
-        primaryStage.setScene(TelaLoginScene);
+        primaryStage.setScene(TelaPrincipalComumScene);
         primaryStage.show();
 
         //Definindo uma operação de fechar padrão para a janela que vai funcionar em todas as telas
@@ -124,6 +128,9 @@ public class Main extends Application {
                 break;
             case "TelaCriarPlaylist":
                 stage.setScene(TelaCriarPlaylistScene);
+                break;
+            case "TelaRemoverPlaylist":
+                stage.setScene(TelaRemoverPlaylistScene);
                 break;
 
         }
