@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Media-Player-App:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="df6a7a25-cddc-4878-95be-f83266e3f83e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/br/ufrn/imd/DAO/UsuariosDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/br/ufrn/imd/DAO/UsuariosDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/br/ufrn/imd/Diretorios/usuarios.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/jaudiotagger-2.0.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/jlayer-1.0.1.jar" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2QUMTB7FSt9pM82U6Py5Ac9Z3SN" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Caio Vitor/Desktop/Media-Player-App&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Caio Vitor\Desktop\Media-Player-App\br\ufrn\imd\DAO" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="br.ufrn.imd.InterfacesGraficas" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="df6a7a25-cddc-4878-95be-f83266e3f83e" name="Changes" comment="" />
+      <created>1685403716266</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1685403716266</updated>
+      <workItem from="1685403716270" duration="138000" />
+      <workItem from="1685556385199" duration="2165000" />
+      <workItem from="1685606660654" duration="44000" />
+      <workItem from="1685693463493" duration="2172000" />
+      <workItem from="1685695678372" duration="18000" />
+      <workItem from="1685695735084" duration="73000" />
+      <workItem from="1685788034295" duration="5864000" />
+      <workItem from="1685794008823" duration="1452000" />
+      <workItem from="1685795556673" duration="225000" />
+      <workItem from="1686234707982" duration="12000" />
+      <workItem from="1686234759505" duration="69000" />
+      <workItem from="1686315798262" duration="2177000" />
+      <workItem from="1686324187518" duration="3194000" />
+      <workItem from="1686689267194" duration="66000" />
+      <workItem from="1686693532650" duration="76000" />
+      <workItem from="1686694254062" duration="74000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

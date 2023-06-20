@@ -10,9 +10,17 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * The Media Player program implements an application that
+ * is capable of playing ".mp3" music files.
+ *
+ * @author  Caio Vitor
+ * @version 1.0
+ * @since   2023-06-13
+ */
 public class Main extends Application {
 
-    //Declaração da janela, telas e singleton
+    // Declaração da janela, telas e singleton
     private static Stage stage;
     private static Scene TelaLoginScene;
     private static Scene TelaPrincipalScene;
@@ -29,12 +37,18 @@ public class Main extends Application {
     private static UsuariosDAO usuariosDAO;
     private static PlaylistDAO playlistDAO;
 
+    /**
+     * JavaFX's application startup method.
+     *
+     * @param primaryStage application's primary Stage.
+     * @throws IOException thrown exception if there is any error.
+     */
     @Override
     public void start(Stage primaryStage) throws IOException {
-        //Janela primária
+        // Janela primária
         stage = primaryStage;
 
-        //Cash de todas as telas do programa.
+        // Cache de todas as telas do programa.
         Parent fxmlLogin = FXMLLoader.load((getClass().getResource("TelaLogin.fxml")));
         TelaLoginScene = new Scene(fxmlLogin);
 
@@ -54,25 +68,25 @@ public class Main extends Application {
         TelaRemoverUsuarioScene = new Scene(fxmlTelaRemoverUsuario);
 
         Parent fxmlTelaListagemUsuarios = FXMLLoader.load((getClass().getResource("TelaListagemUsuarios.fxml")));
-        TelaListagemUsuariosScene = new Scene(fxmlTelaListagemUsuarios );
+        TelaListagemUsuariosScene = new Scene(fxmlTelaListagemUsuarios);
 
         Parent fxmlTelaCriarPlaylist = FXMLLoader.load((getClass().getResource("TelaCriarPlaylist.fxml")));
-        TelaCriarPlaylistScene  = new Scene(fxmlTelaCriarPlaylist );
+        TelaCriarPlaylistScene = new Scene(fxmlTelaCriarPlaylist);
 
         Parent fxmlTelaRemoverPlaylist = FXMLLoader.load((getClass().getResource("TelaRemoverPlaylist.fxml")));
-        TelaRemoverPlaylistScene  = new Scene(fxmlTelaRemoverPlaylist );
+        TelaRemoverPlaylistScene = new Scene(fxmlTelaRemoverPlaylist);
 
-        //Definições padrões da janela
+        // Definições padrões da janela
         primaryStage.setTitle("Media Player App");
         primaryStage.setResizable(false);
         primaryStage.setScene(TelaLoginScene);
         primaryStage.show();
 
-        //Definindo uma operação de fechar padrão para a janela que vai funcionar em todas as telas
+        // Definindo uma operação de fechar padrão para a janela que vai funcionar em todas as telas
         stage.setOnCloseRequest(event -> {
             usuariosDAO = UsuariosDAO.getInstance();
             usuariosDAO.salvarUsuarios();
-            if(!isUserCommon()){
+            if (!isUserCommon()) {
                 playlistDAO = PlaylistDAO.getInstance();
                 playlistDAO.salvarPlaylists();
             }
@@ -80,31 +94,54 @@ public class Main extends Application {
                 System.out.println("Fechando o sistema...");
                 Thread.sleep(500);
             } catch (InterruptedException e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
             System.exit(0);
         });
     }
 
-    public static void setUserName(String name){
+    /**
+     * Defines logged user's Name.
+     *
+     * @param name the username.
+     */
+    public static void setUserName(String name) {
         userName = name;
     }
 
-    public static String getUserName(){
+    /**
+     * Get the logged user's name.
+     *
+     * @return user's name.
+     */
+    public static String getUserName() {
         return userName;
     }
 
-    public static void setIsUserCommon(boolean condition){
+    /**
+     * Sets the Common user condition.
+     *
+     * @param condition true if is a common user, false if not.
+     */
+    public static void setIsUserCommon(boolean condition) {
         isUserCommon = condition;
     }
 
-    public static boolean isUserCommon(){
+    /**
+     * Gets the condition if logged user is a Common User.
+     * @return true se for um usuário comum, false caso contrário.
+     */
+    public static boolean isUserCommon() {
         return isUserCommon;
     }
 
-    public static void changeScreen(String screen){
-        switch (screen){
+    /**
+     * Changes the screen using the name passed as parameter.
+     *
+     * @param screen name of the screen to be shown.
+     */
+    public static void changeScreen(String screen) {
+        switch (screen) {
             case "login":
                 stage.setScene(TelaLoginScene);
                 break;
@@ -132,10 +169,14 @@ public class Main extends Application {
             case "TelaRemoverPlaylist":
                 stage.setScene(TelaRemoverPlaylistScene);
                 break;
-
         }
     }
 
+    /**
+     * Main method that starts the application.
+     *
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         launch();
     }
