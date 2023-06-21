@@ -2,7 +2,9 @@ package br.ufrn.imd.Controller;
 
 import br.ufrn.imd.DAO.PlaylistDAO;
 import br.ufrn.imd.DAO.UsuariosDAO;
+import br.ufrn.imd.Modelo.Admin;
 import br.ufrn.imd.Modelo.Playlist;
+import br.ufrn.imd.Modelo.Usuario;
 import br.ufrn.imd.Visao.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +18,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.DirectoryChooser;
 
-import java.io.File;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -25,6 +27,7 @@ import java.util.TimerTask;
 
 
 public class TelaPrincipalController implements Initializable {
+    private static final File songs_txt = new File(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Diretorios/songs.txt");
     private static UsuariosDAO usuariosDAO;
     private static PlaylistDAO playlistDAO;
     private ObservableList<String> musicListItems;
@@ -35,6 +38,7 @@ public class TelaPrincipalController implements Initializable {
 
     private File directory;
     private File [] currentDirectoryFiles;
+
     private ArrayList<File> songs;
     private Media media;
     private MediaPlayer mediaPlayer;
@@ -71,13 +75,13 @@ public class TelaPrincipalController implements Initializable {
         playlistDAO = PlaylistDAO.getInstance();
         playlistDAO.carregarPlaylists();
 
-
         songs = new ArrayList<File>();
         directory = new File("");
         currentDirectoryFiles = directory.listFiles();
 
         listaPlaylists = playlistDAO.getPlaylistsNames();
         playlistListView.setItems(listaPlaylists);
+
 
         isPlaying = false;
         musicListItems = FXCollections.observableArrayList();
@@ -139,6 +143,9 @@ public class TelaPrincipalController implements Initializable {
         vinylImage.setImage(vinylImg);
         refreshPlaylistImage.setImage(refreshPlaylistImg);
 
+        loadSongs();
+        updateMusicListFromLoading();
+
     }
 
     //Definição das funções dos botões de navegação do usuário VIP e Admin
@@ -167,6 +174,7 @@ public class TelaPrincipalController implements Initializable {
         if(mediaPlayer != null && isPlaying){
             playlistDAO.salvarPlaylists();
             usuariosDAO.salvarUsuarios();
+            saveSongs();
             mediaPlayer.stop();
         }
     }
@@ -201,6 +209,7 @@ public class TelaPrincipalController implements Initializable {
         }
         else {
             songs.remove(currentMusicIndex);
+            saveSongs();
             musicListItems.remove(currentMusicIndex);
             if(currentMusicIndex - 1 <= 0){
                 currentMusicIndex = 0;
@@ -222,6 +231,7 @@ public class TelaPrincipalController implements Initializable {
         else {
             songs.clear();
             musicListItems.clear();
+            saveSongs();
             if(musicListItems.isEmpty() && songs.isEmpty() && isPlaying){
                 mediaPlayer.stop();
             }
@@ -318,6 +328,7 @@ public class TelaPrincipalController implements Initializable {
             if (directory != null) {
                 currentDirectoryFiles = directory.listFiles();
                 updateMusicList(currentDirectoryFiles);
+                saveSongs();
             }
         }
 
@@ -332,6 +343,7 @@ public class TelaPrincipalController implements Initializable {
             if (directory != null) {
                 currentDirectoryFiles = directory.listFiles();
                 updateMusicList(currentDirectoryFiles);
+                saveSongs();
             }
         }
 
@@ -342,14 +354,28 @@ public class TelaPrincipalController implements Initializable {
             if (directory != null) {
                 currentDirectoryFiles = directory.listFiles();
                 updateMusicList(currentDirectoryFiles);
+                saveSongs();
             }
+        }
+    }
+
+    private void updateMusicListFromLoading(){
+        if (!songs.isEmpty()) {
+            for (File song : songs) {
+                musicListItems.add(song.getName());
+            }
+            totalMusicCount = musicListItems.size();
+            currentMusicIndex = -1;
+            resetProgressBar();
         }
     }
 
     //Definição das funções de funcionalidade da barra de progressão e update da lista de musicas
     private void updateMusicList(File[] files) {
         //limpa a lista
-        musicListItems.clear();
+        if(musicListItems != null) {
+            musicListItems.clear();
+        }
 
         //insere apenas os arquivos .mp3 no array
         for (File file : files) {
@@ -394,6 +420,46 @@ public class TelaPrincipalController implements Initializable {
         if(running == true) {
             running = false;
             timer.cancel();
+        }
+    }
+
+    public void saveSongs() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream(songs_txt);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(songs);
+            out.close();
+            fileOut.close();
+            System.out.println("músicas salvas com sucesso.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadSongs() {
+        try {
+            if (!songs_txt.exists()) {
+                songs_txt.createNewFile();
+                System.out.println("Arquivo songs.txt criado.");
+                // Adicionar o usuário Admin padrão
+
+                return;
+            }
+
+            FileInputStream fileIn = new FileInputStream(songs_txt);
+            if (songs_txt.length() == 0) {
+                System.out.println("O arquivo songs.txt está vazio.");
+                fileIn.close();
+                return;
+            }
+
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            songs = (ArrayList<File>) in.readObject();
+            in.close();
+            fileIn.close();
+            System.out.println("Músicas carregadas com sucesso.");
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
