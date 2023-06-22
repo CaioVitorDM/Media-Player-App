@@ -18,6 +18,11 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * TelaCadastroVIPController class that handles the actions and elements from the register screen of VIP users.
+ * <br>
+ * @author  Caio Vitor
+ */
 public class TelaCadastroVIPController implements Initializable {
     @FXML
     private TextField tnome;
@@ -30,7 +35,12 @@ public class TelaCadastroVIPController implements Initializable {
     private ImageView backButtonImage, logoImage, backgroundImage, registerTitleImage;
     private Image backButtonImg, logoImg,backgroundImg, registerTitleImg;
 
-
+    /**
+     * Method that is called when the screen is loaded and does the setting of the images in
+     * the elements of the screen, also calls the carregarUsuarios method from the usuarioDAO class.
+     * @param url
+     * @param resourceBundle
+     */
     public void initialize(URL url, ResourceBundle resourceBundle) {
         usuariosDAO = UsuariosDAO.getInstance();
         usuariosDAO.carregarUsuarios();
@@ -50,6 +60,13 @@ public class TelaCadastroVIPController implements Initializable {
         registerTitleImage.setImage(registerTitleImg);
     }
 
+    /**
+     * Method that handles the submit button action (click), calling for the addUsuario
+     * method from users DAO, then sets a warning on the screen. If the operation succeeds, it's an
+     * information warning, if it fails, it's an error warning.
+     *
+     * @param actionEvent
+     */
     @FXML
     private void handleSubmitButton(ActionEvent actionEvent) {
         UsuarioVIP c = new UsuarioVIP();
@@ -67,7 +84,7 @@ public class TelaCadastroVIPController implements Initializable {
         else{
             Alert alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setHeaderText("Não foi possível cadastrar usuário");
-            alerta.setTitle("Erro");
+            alerta.setTitle("Error");
             alerta.show();
         }
 
@@ -77,6 +94,11 @@ public class TelaCadastroVIPController implements Initializable {
         tnome.requestFocus();
     }
 
+    /**
+     * Method that handles the back button action (click), calls for the method changeScreen
+     * passing the string to the VIP/Admin main screen.
+     * @param actionEvent
+     */
     @FXML
     private void handleBackButton(ActionEvent actionEvent) {
         Main.changeScreen("TelaPrincipal");

@@ -14,9 +14,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * TelaCadastroComumController class that handles the actions and elements from the register screen of common users.
+ * <br>
+ * @author  Caio Vitor
+ */
 public class TelaCadastroComumController implements Initializable {
     @FXML
     private TextField tnome;
@@ -29,7 +35,12 @@ public class TelaCadastroComumController implements Initializable {
     private ImageView backButtonImage, logoImage, backgroundImage, registerTitleImage;
     private Image backButtonImg, logoImg,backgroundImg, registerTitleImg;
 
-
+    /**
+     * Method that is called when the screen is loaded and does the setting of the images in
+     * the elements of the screen, also calls the carregarUsuarios method from the usuarioDAO class.
+     * @param url
+     * @param resourceBundle
+     */
     public void initialize(URL url, ResourceBundle resourceBundle) {
         usuariosDAO = UsuariosDAO.getInstance();
         usuariosDAO.carregarUsuarios();
@@ -49,6 +60,14 @@ public class TelaCadastroComumController implements Initializable {
         registerTitleImage.setImage(registerTitleImg);
     }
 
+
+    /**
+     * Method that handles the submit button action (click), calling for the addUsuario
+     * method from users DAO, then sets a warning on the screen. If the operation succeeds, it's an
+     * information warning, if it fails, is an error warning.
+     *
+     * @param actionEvent
+     */
     @FXML
     private void handleSubmitButton(ActionEvent actionEvent) {
         UsuarioComum c = new UsuarioComum();
@@ -66,7 +85,7 @@ public class TelaCadastroComumController implements Initializable {
         else{
             Alert alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setHeaderText("Não foi possível cadastrar usuário");
-            alerta.setTitle("Erro");
+            alerta.setTitle("Error");
             alerta.show();
         }
 
@@ -76,6 +95,11 @@ public class TelaCadastroComumController implements Initializable {
         tnome.requestFocus();
     }
 
+    /**
+     * Method that handles the back button action (click), calls for the method changeScreen
+     * passing the string to the VIP/Admin main screen.
+     * @param actionEvent
+     */
     @FXML
     private void handleBackButton(ActionEvent actionEvent) {
         Main.changeScreen("TelaPrincipal");

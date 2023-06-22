@@ -5,12 +5,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * @author  Caio Vitor
- *
- *<br>
  * Playlist class <br>
  * implements Serializable, to allow playlists to be saved in the ".txt" file.
- *
+ * <br>
+ * @author  Caio Vitor
  */
 public class Playlist implements Serializable {
 

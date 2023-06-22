@@ -19,6 +19,11 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * TelaCriarPlaylistController class that handles the actions and elements from the register screen of Playlists.
+ * <br>
+ * @author  Caio Vitor
+ */
 public class TelaCriarPlaylistController implements Initializable {
     @FXML
     private TextField tnome;
@@ -31,7 +36,12 @@ public class TelaCriarPlaylistController implements Initializable {
     private ImageView backButtonImage, logoImage, backgroundImage, registerTitleImage;
     private Image backButtonImg, logoImg,backgroundImg, registerTitleImg;
 
-
+    /**
+     * Method that is called when the screen is loaded and does the setting of the images in
+     * the elements of the screen, also calls the carregarPlaylists method from the playlistDAO class.
+     * @param url
+     * @param resourceBundle
+     */
     public void initialize(URL url, ResourceBundle resourceBundle) {
         playlistDAO = PlaylistDAO.getInstance();
         playlistDAO.carregarPlaylists();
@@ -51,6 +61,13 @@ public class TelaCriarPlaylistController implements Initializable {
         registerTitleImage.setImage(registerTitleImg);
     }
 
+    /**
+     * Method that handles the submit button action (click), calling for the addPlaylist
+     * method from playlist DAO, then sets a warning on the screen. If the operation succeeds, it's an
+     * information warning, if it fails, it's an error warning.
+     *
+     * @param actionEvent
+     */
     @FXML
     private void handleSubmitButton(ActionEvent actionEvent) {
         Playlist c = new Playlist();
@@ -76,6 +93,11 @@ public class TelaCriarPlaylistController implements Initializable {
         tnome.requestFocus();
     }
 
+    /**
+     * Method that handles the back button action (click), calls for the method changeScreen
+     * passing the string to the VIP/Admin main screen.
+     * @param actionEvent
+     */
     @FXML
     private void handleBackButton(ActionEvent actionEvent) {
         Main.changeScreen("TelaPrincipal");

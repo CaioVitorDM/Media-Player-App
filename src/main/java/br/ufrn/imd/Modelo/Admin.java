@@ -1,12 +1,10 @@
 package br.ufrn.imd.Modelo;
 
 /**
- * @author  Caio Vitor
- *
- *<br>
  * Admin User class that inherits from User and.
  * implements Serializable, to allow Admin User to be saved in the ".txt" file.
- *
+ * <br>
+ * @author  Caio Vitor
  */
 public class Admin extends Usuario{
 

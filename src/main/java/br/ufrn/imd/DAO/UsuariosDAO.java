@@ -9,6 +9,12 @@ import javafx.collections.ObservableList;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * UsuariosDAO class that stores an ArrayList of Usuario class
+ * also implements singleton architecture to manage the array.
+ * <br>
+ * @author  Caio Vitor
+ */
 public class UsuariosDAO {
     private ArrayList<Usuario> listaUsuarios;
     private static UsuariosDAO usuariosDAO;
@@ -20,7 +26,10 @@ public class UsuariosDAO {
         listaUsuarios.add(userAdmin);
     }
 
-    //Singleton
+    /**
+     * Method to get singleton instance
+     * @return usuariosDAO
+     */
     public static UsuariosDAO getInstance(){
         if(usuariosDAO == null){
             usuariosDAO = new UsuariosDAO();
@@ -28,6 +37,13 @@ public class UsuariosDAO {
         return usuariosDAO;
     }
 
+    /**
+     * Method to add users in the arraylist
+     * the method returns true if the operation suceeds and false
+     * if it doesn't.
+     * @param usuario
+     * @return boolean
+     */
     public boolean addUsuario(Usuario usuario){
         for(int i = 0; i < listaUsuarios.size(); i++){
             if(usuario.getNomeusuario().equals(listaUsuarios.get(i).getNomeusuario()) || usuario.getNomeusuario().equals("Admin")){
@@ -40,6 +56,13 @@ public class UsuariosDAO {
         return true;
     }
 
+    /**
+     * Method to remove users in the arraylist
+     * the method returns true if the operation succeeds and false
+     * if it doesn't.
+     * @param usuario
+     * @return boolean
+     */
     public boolean removeUsuario(Usuario usuario){
         for(int i = 0; i < listaUsuarios.size(); i++){
             if(usuario.getNomeusuario().equals(listaUsuarios.get(i).getNomeusuario()) && !usuario.getNomeusuario().equals("Admin")) {
@@ -52,6 +75,12 @@ public class UsuariosDAO {
         return false;
     }
 
+    /**
+     * Method to save users in the ".txt" file
+     * the method uses an exception treatment to do so
+     * printing a message if succeeded.
+     * if it doesn't.
+     */
     public void salvarUsuarios() {
         try {
             FileOutputStream fileOut = new FileOutputStream(arquivo);
@@ -65,6 +94,12 @@ public class UsuariosDAO {
         }
     }
 
+
+    /**
+     * Method to load users from ".txt" file
+     * the method checks if the file exists and if the file is empty before reading it
+     * printing a message for every case.
+     */
     public void carregarUsuarios() {
         try {
             if (!arquivo.exists()) {
@@ -94,6 +129,14 @@ public class UsuariosDAO {
         }
     }
 
+    /**
+     * Method that is used to make the login of the user
+     * receiving the name and the password of the user and then
+     * returns a boolean if the operation succeed or fail.
+     * @param nome
+     * @param senha
+     * @return boolean
+     */
     public boolean loginUser(String nome, String senha){
         for(int i = 0; i < listaUsuarios.size(); i++){
             if(listaUsuarios.get(i).getNomeusuario().equals(nome) && listaUsuarios.get(i).getSenha().equals(senha)){
@@ -103,6 +146,14 @@ public class UsuariosDAO {
         return false;
     }
 
+    /**
+     * Method that is used to check if the logged user is VIP
+     * receiving the name and the password of the user and then
+     * returns a boolean.
+     * @param nome
+     * @param senha
+     * @return boolean
+     */
     public boolean isUserVIP(String nome, String senha){
         for(int i = 0; i < listaUsuarios.size(); i++){
             if(listaUsuarios.get(i).getNomeusuario().equals(nome) && listaUsuarios.get(i).getSenha().equals(senha)){
@@ -117,6 +168,14 @@ public class UsuariosDAO {
         return false;
     }
 
+    /**
+     * Method that is used to check if the logged user is Admin
+     * receiving the name and the password of the user and then
+     * returns a boolean.
+     * @param nome
+     * @param senha
+     * @return boolean
+     */
     public boolean isUserAdmin(String nome, String senha){
         for(int i = 0; i < listaUsuarios.size(); i++){
             if(listaUsuarios.get(i).getNomeusuario().equals(nome) && listaUsuarios.get(i).getSenha().equals(senha)){
@@ -132,6 +191,13 @@ public class UsuariosDAO {
     }
 
     //Metodo para retornar uma Lista com os nomes dos usuários para inserir na tabela de listagem
+
+    /**
+     * Method to return an ObservableList of string that has the
+     * names of each user in the arraylist of the DAO, and also puts
+     * the type of the users beside the name.
+     * @return nomeUsuarios
+     */
     public ObservableList<String> getNomesUsuarios() {
         ObservableList<String> nomesUsuarios = FXCollections.observableArrayList();
         for (Usuario usuario : listaUsuarios) {

@@ -170,11 +170,11 @@ public class TelaPrincipalController implements Initializable {
     private void handleRemovePlaylistButton(ActionEvent actionEvent) { Main.changeScreen("TelaRemoverPlaylist"); }
     @FXML
     private void handleSignOutButton(ActionEvent actionEvent) {
+        playlistDAO.salvarPlaylists();
+        usuariosDAO.salvarUsuarios();
+        saveSongs();
         Main.changeScreen("login");
         if(mediaPlayer != null && isPlaying){
-            playlistDAO.salvarPlaylists();
-            usuariosDAO.salvarUsuarios();
-            saveSongs();
             mediaPlayer.stop();
         }
     }
@@ -423,7 +423,7 @@ public class TelaPrincipalController implements Initializable {
         }
     }
 
-    public void saveSongs() {
+    private void saveSongs() {
         try {
             FileOutputStream fileOut = new FileOutputStream(songs_txt);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -436,7 +436,7 @@ public class TelaPrincipalController implements Initializable {
         }
     }
 
-    public void loadSongs() {
+    private void loadSongs() {
         try {
             if (!songs_txt.exists()) {
                 songs_txt.createNewFile();

@@ -3,12 +3,10 @@ package br.ufrn.imd.Modelo;
 import java.io.Serializable;
 
 /**
- * @author  Caio Vitor
- *
- *<br>
  * Abstract class that will be inherited by all kind of users.
  * implements Serializable, to allow users to be saved in the ".txt" file.
- *
+ *<br>
+ * @author  Caio Vitor
  */
 public abstract class Usuario implements Serializable {
 

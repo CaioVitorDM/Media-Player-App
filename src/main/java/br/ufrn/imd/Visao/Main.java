@@ -84,9 +84,9 @@ public class Main extends Application {
 
         // Definindo uma operação de fechar padrão para a janela que vai funcionar em todas as telas
         stage.setOnCloseRequest(event -> {
-            usuariosDAO = UsuariosDAO.getInstance();
-            usuariosDAO.salvarUsuarios();
             if (!isUserCommon()) {
+                usuariosDAO = UsuariosDAO.getInstance();
+                usuariosDAO.salvarUsuarios();
                 playlistDAO = PlaylistDAO.getInstance();
                 playlistDAO.salvarPlaylists();
             }

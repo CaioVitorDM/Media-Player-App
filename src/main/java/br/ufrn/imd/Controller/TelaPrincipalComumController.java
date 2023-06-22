@@ -16,7 +16,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.DirectoryChooser;
 
-import java.io.File;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -25,6 +25,7 @@ import java.util.TimerTask;
 
 
 public class TelaPrincipalComumController implements Initializable {
+    private static final File songs_txt = new File(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Diretorios/songs_2.txt");
     private ObservableList<String> musicListItems;
     private int currentMusicIndex;
     private int totalMusicCount = 0;
@@ -68,6 +69,9 @@ public class TelaPrincipalComumController implements Initializable {
             }
         });
 
+        loadSongs();
+        updateMusicListFromLoading();
+
 
         //Definição das imagens que aparecerão nos botões da tela
         playImage = new Image(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Images/play-button.png");
@@ -110,6 +114,7 @@ public class TelaPrincipalComumController implements Initializable {
     }
     @FXML
     private void handleSignOutButton(ActionEvent actionEvent) {
+        saveSongs();
         Main.changeScreen("login");
         if(mediaPlayer != null && isPlaying){
             mediaPlayer.stop();
@@ -142,6 +147,7 @@ public class TelaPrincipalComumController implements Initializable {
         }
         else {
             songs.remove(currentMusicIndex);
+            saveSongs();
             musicListItems.remove(currentMusicIndex);
             if(currentMusicIndex - 1 <= 0){
                 currentMusicIndex = 0;
@@ -163,6 +169,7 @@ public class TelaPrincipalComumController implements Initializable {
         else {
             songs.clear();
             musicListItems.clear();
+            saveSongs();
             if(musicListItems.isEmpty() && songs.isEmpty() && isPlaying){
                 mediaPlayer.stop();
             }
@@ -259,6 +266,7 @@ public class TelaPrincipalComumController implements Initializable {
             if (directory != null) {
                 currentDirectoryFiles = directory.listFiles();
                 updateMusicList(currentDirectoryFiles);
+                saveSongs();
             }
         }
 
@@ -273,6 +281,7 @@ public class TelaPrincipalComumController implements Initializable {
             if (directory != null) {
                 currentDirectoryFiles = directory.listFiles();
                 updateMusicList(currentDirectoryFiles);
+                saveSongs();
             }
         }
 
@@ -283,6 +292,7 @@ public class TelaPrincipalComumController implements Initializable {
             if (directory != null) {
                 currentDirectoryFiles = directory.listFiles();
                 updateMusicList(currentDirectoryFiles);
+                saveSongs();
             }
         }
     }
@@ -335,6 +345,57 @@ public class TelaPrincipalComumController implements Initializable {
         if(running == true) {
             running = false;
             timer.cancel();
+        }
+    }
+
+    private void saveSongs() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream(songs_txt);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(songs);
+            out.close();
+            fileOut.close();
+            System.out.println("músicas salvas com sucesso.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadSongs() {
+        try {
+            if (!songs_txt.exists()) {
+                songs_txt.createNewFile();
+                System.out.println("Arquivo songs_2.txt criado.");
+                // Adicionar o usuário Admin padrão
+
+                return;
+            }
+
+            FileInputStream fileIn = new FileInputStream(songs_txt);
+            if (songs_txt.length() == 0) {
+                System.out.println("O arquivo songs_2.txt está vazio.");
+                fileIn.close();
+                return;
+            }
+
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            songs = (ArrayList<File>) in.readObject();
+            in.close();
+            fileIn.close();
+            System.out.println("Músicas carregadas com sucesso.");
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateMusicListFromLoading(){
+        if (!songs.isEmpty()) {
+            for (File song : songs) {
+                musicListItems.add(song.getName());
+            }
+            totalMusicCount = musicListItems.size();
+            currentMusicIndex = -1;
+            resetProgressBar();
         }
     }
 

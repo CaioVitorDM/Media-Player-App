@@ -5,12 +5,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * @author  Caio Vitor
- *
- *<br>
  * VIP User class that inherits from User and.
  * implements Serializable, to allow VIP users to be saved in the ".txt" file.
- *
+ * <br>
+ * @author  Caio Vitor
  */
 public class UsuarioVIP extends Usuario implements Serializable {
 

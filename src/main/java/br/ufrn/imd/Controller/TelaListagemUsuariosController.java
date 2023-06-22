@@ -19,6 +19,11 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * TelaListagemUsuariosController class that handles the actions and elements from the listing screen of users.
+ * <br>
+ * @author  Caio Vitor
+ */
 public class TelaListagemUsuariosController implements Initializable {
     @FXML
     private ListView<String> tabela;
@@ -31,6 +36,14 @@ public class TelaListagemUsuariosController implements Initializable {
     private static UsuariosDAO usuariosDAO;
     ObservableList<String> items;
 
+    /**
+     * Method that is called when the screen is loaded and does the setting of the images in
+     * the elements of the screen, also calls the carregarUsuarios method from the usuariosDAO class.
+     * Also calls getNomesUsuarios to get the user's names from the usuariosDAO and pass to the variable items.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     public void initialize(URL url, ResourceBundle resourceBundle) {
         usuariosDAO = UsuariosDAO.getInstance();
         usuariosDAO.carregarUsuarios();
@@ -53,11 +66,22 @@ public class TelaListagemUsuariosController implements Initializable {
         refreshButtonImage.setImage(refreshButtonImg);
     }
 
+    /**
+     * Method that refreshes the list of user's names.
+     */
     @FXML
     private void atualizarListaUsuarios() {
         items.setAll(usuariosDAO.getNomesUsuarios());
     }
 
+    /**
+     * Method that handles the back button action (click), calls for the method changeScreen
+     * and consults the Main to know if the logged user is common or VIP/Admin.
+     *
+     * If it's common, pass the string to change the screen to the common users main screen.
+     * If it's VIP/Admin, pass the string to change the screen to then VIP/Admin users main screen.
+     * @param actionEvent
+     */
     @FXML
     private void handleBackButton(ActionEvent actionEvent) {
         if(Main.isUserCommon()){
@@ -70,6 +94,10 @@ public class TelaListagemUsuariosController implements Initializable {
         }
     }
 
+    /**
+     * Method that handles refresh button and calls for atualizarListaUsuarios.
+     * @param actionEvent
+     */
     public void handleRefreshButton(ActionEvent actionEvent){
         atualizarListaUsuarios();
     }

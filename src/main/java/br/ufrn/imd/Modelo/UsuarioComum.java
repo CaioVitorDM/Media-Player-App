@@ -3,12 +3,10 @@ package br.ufrn.imd.Modelo;
 import java.io.Serializable;
 
 /**
- * @author  Caio Vitor
- *
- *<br>
  * Common User class that inherits from User and.
  * implements Serializable, to allow Common users to be saved in the ".txt" file.
- *
+ *<br>
+ * @author  Caio Vitor
  */
 public class UsuarioComum  extends  Usuario implements Serializable {
 

@@ -17,6 +17,11 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * TelaRemoverUsuarioController class that handles the actions and elements from the remove screen of users.
+ * <br>
+ * @author  Caio Vitor
+ */
 public class TelaRemoverUsuarioController implements Initializable {
     @FXML
     private TextField tnome;
@@ -29,7 +34,12 @@ public class TelaRemoverUsuarioController implements Initializable {
     private ImageView backButtonImage, logoImage, backgroundImage, removeTitleImage;
     private Image backButtonImg, logoImg,backgroundImg, removeTitleImg;
 
-
+    /**
+     * Method that is called when the screen is loaded and does the setting of the images in
+     * the elements of the screen, also calls the carregarUsuarios method from the usuariosDAO class.
+     * @param url
+     * @param resourceBundle
+     */
     public void initialize(URL url, ResourceBundle resourceBundle) {
         usuariosDAO = UsuariosDAO.getInstance();
         usuariosDAO.carregarUsuarios();
@@ -49,6 +59,13 @@ public class TelaRemoverUsuarioController implements Initializable {
         removeTitleImage.setImage(removeTitleImg);
     }
 
+    /**
+     * Method that handles the submit button action (click), calling for the removeUsuario
+     * method from usuarios DAO, then sets a warning on the screen. If the operation succeeds, it's an
+     * information warning, if it fails, it's an error warning.
+     *
+     * @param actionEvent
+     */
     @FXML
     private void handleSubmitButton(ActionEvent actionEvent) {
         UsuarioComum c = new UsuarioComum();
@@ -74,6 +91,11 @@ public class TelaRemoverUsuarioController implements Initializable {
         tnome.requestFocus();
     }
 
+    /**
+     * Method that handles the back button action (click), calls for the method changeScreen
+     * passing the string to the VIP/Admin main screen.
+     * @param actionEvent
+     */
     @FXML
     private void handleBackButton(ActionEvent actionEvent) {
         Main.changeScreen("TelaPrincipal");
