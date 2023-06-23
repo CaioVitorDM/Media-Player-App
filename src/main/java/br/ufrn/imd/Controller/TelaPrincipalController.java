@@ -25,8 +25,13 @@ import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
+/**
+ * TelaPrincipalController class that handles the actions and elements from the VIP/Admin user main screen
+ * <br>
+ * @author  Caio Vitor
+ */
 public class TelaPrincipalController implements Initializable {
+    //songs.txt file path
     private static final File songs_txt = new File(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Diretorios/songs.txt");
     private static UsuariosDAO usuariosDAO;
     private static PlaylistDAO playlistDAO;
@@ -36,9 +41,12 @@ public class TelaPrincipalController implements Initializable {
     private int currentPlaylistIndex;
     private int totalMusicCount = 0;
 
+    //recebe o diretório recente
     private File directory;
+    //recebe os arquivos do diretório recente
     private File [] currentDirectoryFiles;
 
+    //guarda todas as músicas
     private ArrayList<File> songs;
     private Media media;
     private MediaPlayer mediaPlayer;
@@ -68,6 +76,14 @@ public class TelaPrincipalController implements Initializable {
     private Image playImage, stopImage, nextButtonImg, previousButtonImg, backgroundImg, selectDirectoryImg, removeMusicImg, clearMusicsImg, muteButtonImg, unmuteButtonImg;
     private Image registerUserImg, registerVIPImg, userImg, removeUserImg, listUserImg, signOutImg, addPlaylistImg, vinylImg, refreshPlaylistImg;
 
+    /**
+     * Method that is called when the screen is loaded and does the setting of the images in
+     * the elements of the screen, also calls the carregarUsuarios and carregarPlaylist methods from the DAO's classes.
+     *
+     * Also starts the listview of music and playlist, and loads the musics saved in the songs.txt file using loadSongs method.
+     * @param url
+     * @param resourceBundle
+     */
     public void initialize(URL url, ResourceBundle resourceBundle) {
         usuariosDAO = UsuariosDAO.getInstance();
         usuariosDAO.carregarUsuarios();
@@ -149,25 +165,62 @@ public class TelaPrincipalController implements Initializable {
     }
 
     //Definição das funções dos botões de navegação do usuário VIP e Admin
-    public void handleRegisterUserButton(ActionEvent actionEvent) {
+
+    /**
+     * Method that handles the Register Common User button, changing the screen using changeScreen method
+     * @param actionEvent button event
+     */
+    @FXML
+    private void handleRegisterUserButton(ActionEvent actionEvent) {
         Main.changeScreen("TelaCadastroComum");
     }
+
+    /**
+     * Method that handles the Register VIP User button, changing the screen using changeScreen method
+     * @param actionEvent button event
+     */
     @FXML
     private void handleRegisterVIPButton(ActionEvent actionEvent){
         Main.changeScreen("TelaCadastroVIP");
     }
+
+    /**
+     * Method that handles the Remove User button, changing the screen using changeScreen method
+     * @param actionEvent button event
+     */
     @FXML
     private void handleRemoveUserButton(ActionEvent actionEvent){
         Main.changeScreen("TelaRemoverUsuario");
     }
+
+    /**
+     * Method that handles the List Users button, changing the screen using changeScreen method
+     * @param actionEvent button event
+     */
     @FXML
     private void handleListUserButton(ActionEvent actionEvent) {
         Main.changeScreen("TelaListagemUsuarios");
     }
+
+    /**
+     * Method that handles the Register Playlist button, changing the screen using changeScreen method
+     * @param actionEvent button event
+     */
     @FXML
     private void handleAddPlaylistButton(ActionEvent actionEvent) { Main.changeScreen("TelaCriarPlaylist"); }
+
+    /**
+     * Method that handles the Remove Playlist button, changing the screen using changeScreen method
+     * @param actionEvent button event
+     */
     @FXML
     private void handleRemovePlaylistButton(ActionEvent actionEvent) { Main.changeScreen("TelaRemoverPlaylist"); }
+
+    /**
+     * Method that handles the Sign-Out  button, changing the screen using changeScreen method
+     * and also saves the playlists, the users, the songs and stops the music if it's playing.
+     * @param actionEvent button event
+     */
     @FXML
     private void handleSignOutButton(ActionEvent actionEvent) {
         playlistDAO.salvarPlaylists();
@@ -178,14 +231,23 @@ public class TelaPrincipalController implements Initializable {
             mediaPlayer.stop();
         }
     }
-    //Definição da função dos botões
+
+    /**
+     * Method that handles the Refresh Playlist button, that does the setAll of the names of the playlists in the screen.
+     * @param actionEvent button event
+     */
     @FXML
-    private void handleRefreshPlaylistButton() {
+    private void handleRefreshPlaylistButton(ActionEvent actionEvent) {
         listaPlaylists.setAll(playlistDAO.getPlaylistsNames());
     }
 
+    /**
+     * Method that handles the Mute button, alternating from muted to unmute using a flag and setting
+     * the correct image for each occasion.
+     * @param actionEvent button event
+     */
     @FXML
-    public void muteButtonClicked(ActionEvent actionEvent) {
+    private void muteButtonClicked(ActionEvent actionEvent) {
         if(musicListItems.isEmpty()){
 
         }
@@ -202,8 +264,14 @@ public class TelaPrincipalController implements Initializable {
         }
     }
 
+    /**
+     * Method that handles the Remove Music button, removing the selected music in the List from the
+     * songs array, decreasing the index of musics lists and saving the changes with saveSongs method.
+     * Also, checks if the list is empty and playing, if so, stops the music.
+     * @param actionEvent button event
+     */
     @FXML
-    public void removeMusicClicked(ActionEvent actionEvent) {
+    private void removeMusicClicked(ActionEvent actionEvent) {
         if(musicListItems.isEmpty()){
 
         }
@@ -223,8 +291,14 @@ public class TelaPrincipalController implements Initializable {
         }
     }
 
+    /**
+     * Method that handles the Clear musics button, clearing all the musics stored in songs and
+     * saving the changes using saveSongs method. Checks it's playing and if the list is empty, if so,
+     * stops the music.
+     * @param actionEvent button event
+     */
     @FXML
-    public void clearMusicsClicked(ActionEvent actionEvent) {
+    private void clearMusicsClicked(ActionEvent actionEvent) {
         if(musicListItems.isEmpty()){
 
         }
@@ -238,6 +312,15 @@ public class TelaPrincipalController implements Initializable {
         }
     }
 
+    /**
+     * Method that handles the Play button. First, checks if it's playing is true, if so, pauses the
+     * music, set a new image for the button and resets the progress bar.
+     *
+     * Else, it gets the selected index from the list and uses to get the music with that index from the songs array,
+     * checking if the file ends with ".mp3" extension. If so, plays the musics, starts the progress bar, set the volume
+     * to max and changes the button image.
+     * @param event button event
+     */
     @FXML
     private void playButtonClicked(ActionEvent event) {
         //checa se a lista de musicas está vazia
@@ -273,6 +356,12 @@ public class TelaPrincipalController implements Initializable {
         }
     }
 
+    /**
+     * Method that handles the next button click. First, checks if the next index is in the correct range of the array (songs).
+     * Then, checks if the progress bar is running, if so, resets it. Then add +1 to the music Index, stops the last playing music,
+     * starts the next one, changes the play button image and starts the progress bar.
+     * @param event button event
+     */
     @FXML
     private void nextButtonClicked(ActionEvent event){
         if(musicListItems.isEmpty()){
@@ -296,6 +385,12 @@ public class TelaPrincipalController implements Initializable {
         }
     }
 
+    /**
+     * Method that handles the previous button click. First, checks if the previous index is in the correct range of the array (songs).
+     * Then, checks if the progress bar is running, if so, resets it. Then remove -1 to the music Index, stops the last playing music,
+     * starts the next one, changes the play button image and starts the progress bar.
+     * @param event button event
+     */
     @FXML
     private void previousButtonClicked(ActionEvent event) {
         if(musicListItems.isEmpty()){
@@ -319,6 +414,20 @@ public class TelaPrincipalController implements Initializable {
         }
     }
 
+    /**
+     * Method to handle the select directory button click.
+     * The method operates equals, but has 3 condition checks. If the mediaPlayer is null, that means
+     * that no music has been played before. If the mediaPlayer is different from null and the music is playing.
+     * And If the mediaPlayer is different from null and the music isn't playing.
+     *
+     * For these three occurrences, it works the same way, its created and directory chooser object, it will check
+     * if the directory is different from null and will persist the data from that selected directory and will call for the
+     * updateMusicList and saveSongs methods.
+     *
+     * There's only a tiny detail, if enters the condition that the music is playing, it will pause the music and reset
+     * the progress bar.
+     * @param event button event
+     */
     @FXML
     private void selectDirectoryButtonClicked(ActionEvent event) {
         //Se o Player da Musica for nula, ou seja, nenhuma musica tiver sido tocada ainda
@@ -359,6 +468,9 @@ public class TelaPrincipalController implements Initializable {
         }
     }
 
+    /**
+     * Private method to update the music list displayed on the screen using the songs loaded from the songs.txt file
+     */
     private void updateMusicListFromLoading(){
         if (!songs.isEmpty()) {
             for (File song : songs) {
@@ -370,7 +482,12 @@ public class TelaPrincipalController implements Initializable {
         }
     }
 
-    //Definição das funções de funcionalidade da barra de progressão e update da lista de musicas
+    /**
+     * Method to update the music list. First, clears the names in the displayed list, then
+     * it will only add the files that end up with ".mp3" extension to the songs array
+     * and at ending will insert the names of the songs in the displayed list on the screen, if the songs array isn't empty.
+     * @param files selected directory files
+     */
     private void updateMusicList(File[] files) {
         //limpa a lista
         if(musicListItems != null) {
@@ -395,7 +512,10 @@ public class TelaPrincipalController implements Initializable {
         }
     }
 
-
+    /**
+     * Method to start the progress bar, using the duration and the current time of the music to
+     * make the progression space of the bar.
+     */
     private void startProgressBarTimer() {
         timer = new Timer();
         task = new TimerTask() {
@@ -416,6 +536,9 @@ public class TelaPrincipalController implements Initializable {
 
     }
 
+    /**
+     * Method to reset the progress bar
+     */
     private void resetProgressBar() {
         if(running == true) {
             running = false;
@@ -423,6 +546,10 @@ public class TelaPrincipalController implements Initializable {
         }
     }
 
+    /**
+     * Method to save the songs stored in the songs array in a ".txt" file, printing a success message
+     * and making use of exception treatment, since it's working with files.
+     */
     private void saveSongs() {
         try {
             FileOutputStream fileOut = new FileOutputStream(songs_txt);
@@ -436,6 +563,12 @@ public class TelaPrincipalController implements Initializable {
         }
     }
 
+    /**
+     * Method to load the songs from the ".txt" file to the songs array when the program is started.
+     * It will check if the ".txt" file exists, if it doesn't, will create it and return.
+     * If exists, but it's empty, will print a warning message and return.
+     * If it's all good, it'll load the musics from the songs.txt to the songs array.
+     */
     private void loadSongs() {
         try {
             if (!songs_txt.exists()) {

@@ -70,7 +70,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>br.ufrn.imd.musicplayer/br.ufrn.imd.musicplayer.HelloApplication</mainClass>
+                            <mainClass>br.ufrn.imd.Visao/br.ufrn.imd.Visao.Main</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

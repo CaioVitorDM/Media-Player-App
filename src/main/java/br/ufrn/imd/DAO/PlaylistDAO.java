@@ -22,6 +22,9 @@ public class PlaylistDAO {
 
     File arquivo = new File(System.getProperty("user.dir") + File.separator + "./src/main/java/br/ufrn/imd/Diretorios/playlists.txt");
 
+    /**
+     * PlaylistDAO Constructor
+     */
     public PlaylistDAO(){
         playlists = new ArrayList<Playlist>();
     }

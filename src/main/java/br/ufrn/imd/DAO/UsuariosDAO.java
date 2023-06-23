@@ -41,7 +41,7 @@ public class UsuariosDAO {
      * Method to add users in the arraylist
      * the method returns true if the operation suceeds and false
      * if it doesn't.
-     * @param usuario
+     * @param usuario - user
      * @return boolean
      */
     public boolean addUsuario(Usuario usuario){
@@ -60,7 +60,7 @@ public class UsuariosDAO {
      * Method to remove users in the arraylist
      * the method returns true if the operation succeeds and false
      * if it doesn't.
-     * @param usuario
+     * @param usuario - user
      * @return boolean
      */
     public boolean removeUsuario(Usuario usuario){
@@ -133,8 +133,8 @@ public class UsuariosDAO {
      * Method that is used to make the login of the user
      * receiving the name and the password of the user and then
      * returns a boolean if the operation succeed or fail.
-     * @param nome
-     * @param senha
+     * @param nome username
+     * @param senha password
      * @return boolean
      */
     public boolean loginUser(String nome, String senha){
@@ -150,8 +150,8 @@ public class UsuariosDAO {
      * Method that is used to check if the logged user is VIP
      * receiving the name and the password of the user and then
      * returns a boolean.
-     * @param nome
-     * @param senha
+     * @param nome username
+     * @param senha password
      * @return boolean
      */
     public boolean isUserVIP(String nome, String senha){
@@ -172,8 +172,8 @@ public class UsuariosDAO {
      * Method that is used to check if the logged user is Admin
      * receiving the name and the password of the user and then
      * returns a boolean.
-     * @param nome
-     * @param senha
+     * @param nome username
+     * @param senha password
      * @return boolean
      */
     public boolean isUserAdmin(String nome, String senha){
