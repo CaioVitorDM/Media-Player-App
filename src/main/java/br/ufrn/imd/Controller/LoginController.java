@@ -72,7 +72,9 @@ public class LoginController implements Initializable {
      * @param actionEvent
      * @throws IOException
      */
-    public void buttonSubmeter(ActionEvent actionEvent) throws IOException {
+
+    @FXML
+    private void buttonSubmeter(ActionEvent actionEvent) throws IOException {
         if (usuariosDAO.loginUser(tnome.getText(), tsenha.getText())) {
             Main.setUserName(tnome.getText());
             // Checagem para saber de qual tipo é o usuário e qual vai ser sua tela
