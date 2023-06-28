@@ -1,6 +1,6 @@
-- Media Player App
+# Media Player App
 
-Authors: Caio Vitor Dantas Machado e Cicero Paulino de Oliveira Filho
+### Authors: Caio Vitor Dantas Machado e Cicero Paulino de Oliveira Filho
 
 A princípio, garanta que você possui a JDK 20.0.1 instalada. Após isso, também
 assegure de que possui o JavaFX-sdk-20.0.1 dentro também da sua pasta Java (geralmente
