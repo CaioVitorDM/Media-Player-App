@@ -1,5 +1,10 @@
 # Media Player App
 
+O projeto foi desenvolvido utilizando as tecnologias Java, JavaFXe e a ferramente SceneBuilder. Tendo
+este sido desenvolvido para a matéria de Linguagem de Programação 2 do curso do BTI da UFRN.
+
+# Para compilar o código
+
 A princípio, garanta que você possui a JDK 20.0.1 instalada. Após isso, também
 assegure de que possui o JavaFX-sdk-20.0.1 dentro também da sua pasta Java (geralmente
 fica localizada em "C:\Program Files\Java").
@@ -15,4 +20,4 @@ e clique na opção "Run" de sua IDE.
 
 #
 
-### Authors: Caio Vitor Dantas Machado e Cicero Paulino de Oliveira Filho
+### Authors: Caio Vitor Dantas Machado
