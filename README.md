@@ -1,7 +1,11 @@
 # Media Player App
 
-O projeto foi desenvolvido utilizando as tecnologias Java, JavaFXe e a ferramente SceneBuilder. Tendo
+O projeto foi desenvolvido utilizando as tecnologias Java, JavaFX e a ferramente SceneBuilder. Tendo
 este sido desenvolvido para a matéria de Linguagem de Programação 2 do curso do BTI da UFRN.
+
+O mesmo consiste em um Media Player que faz diferenciação entre níveis de usuários (o usuário padrão
+para acesso é "Admin" e a senha é "Password"), capaz de adicionar e remover músicas, playlists e usuários.
+Além de, obviamente, tocar músicas.
 
 # Para compilar o código
 
