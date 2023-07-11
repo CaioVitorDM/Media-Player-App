@@ -1,1 +1,5 @@
 *.html linguist-language=Java
+*.css linguist-generated
+*.html linguist-generated
+*.js linguist-generated
+
